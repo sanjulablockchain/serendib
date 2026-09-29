@@ -31,20 +31,32 @@ function Round({ onAnother }: { onAnother: () => void }) {
 
   // Stamp when the visitor started filling in the form, so the server can spot instant bot posts.
   const submit = (formData: FormData) => {
+    if (pending) return;
     formData.set("startedAt", String(mountedAt.current));
     formAction(formData);
   };
 
+  // Move focus to the confirmation so keyboard and screen reader users land on the result.
+  const confirmation = useRef<HTMLSpanElement>(null);
+  const sent = state.status === "sent";
+  useEffect(() => {
+    if (sent) confirmation.current?.focus();
+  }, [sent]);
+
   if (state.status === "sent") {
     return (
-      <div className="flex flex-col items-center gap-[18px] py-10 text-center" aria-live="polite">
+      <div className="flex flex-col items-center gap-[18px] py-10 text-center" role="status">
         <span
           aria-hidden="true"
           className="flex size-[72px] items-center justify-center rounded-full border-2 border-gold-pale bg-radial-[circle_at_40%_35%] from-gold-hi to-gold-mid text-[30px] text-on-gold shadow-check"
         >
           ✓
         </span>
-        <span className="font-display text-[13px] tracking-[0.22em] text-gold-bright">
+        <span
+          ref={confirmation}
+          tabIndex={-1}
+          className="font-display text-[13px] tracking-[0.22em] text-gold-bright outline-none"
+        >
           {contactForm.sent.eyebrow}
         </span>
         <span className="font-display text-[26px] leading-[1.2] text-heading">
@@ -146,8 +158,8 @@ function Round({ onAnother }: { onAnother: () => void }) {
 
       <button
         type="submit"
-        disabled={pending}
-        className="min-h-11 cursor-pointer self-start border border-gold-pale bg-linear-to-b from-gold-soft to-gold px-11 py-4 font-display text-[14px] tracking-[0.2em] text-void shadow-cta transition-shadow hover:shadow-cta-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-bright disabled:cursor-wait disabled:opacity-70"
+        aria-disabled={pending}
+        className="min-h-11 cursor-pointer self-start border border-gold-pale bg-linear-to-b from-gold-soft to-gold px-11 py-4 font-display text-[14px] tracking-[0.2em] text-void shadow-cta transition-shadow hover:shadow-cta-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-bright aria-disabled:cursor-wait aria-disabled:opacity-70"
       >
         {pending ? contactForm.sending : contactForm.submit}
       </button>

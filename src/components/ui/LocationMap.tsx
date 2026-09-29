@@ -3,6 +3,7 @@
 import "leaflet/dist/leaflet.css";
 import { useEffect, useRef } from "react";
 import type { Map as LeafletMap } from "leaflet";
+import { cn } from "@/lib/cn";
 import type { OfficeLocation } from "@/types";
 
 const TILE_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
@@ -13,7 +14,6 @@ const ATTRIBUTION =
 // theme tokens win, so the controls follow light and dark mode.
 const chrome = [
   "[&_.leaflet-tile-pane]:[filter:var(--map-filter)]",
-  "[&_.leaflet-container]:bg-pill! [&_.leaflet-container]:font-sans!",
   "[&_.leaflet-bar]:border-0! [&_.leaflet-bar]:shadow-ring!",
   "[&_.leaflet-bar_a]:size-11! [&_.leaflet-bar_a]:border-edge! [&_.leaflet-bar_a]:bg-btn-from!",
   "[&_.leaflet-bar_a]:text-[22px]! [&_.leaflet-bar_a]:leading-[42px]! [&_.leaflet-bar_a]:text-label!",
@@ -66,7 +66,11 @@ export function LocationMap({ location, label }: { location: OfficeLocation; lab
       ref={container}
       role="region"
       aria-label={label}
-      className={`relative h-full min-h-[352px] w-full overflow-hidden border border-line-strong bg-pill ${chrome}`}
+      className={cn(
+        // Leaflet adds its own class to this element, so the overrides sit on it directly.
+        "relative h-full min-h-[352px] w-full overflow-hidden border border-line-strong bg-pill! font-sans!",
+        chrome,
+      )}
     />
   );
 }
