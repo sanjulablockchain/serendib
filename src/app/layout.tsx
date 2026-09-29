@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
-import { Header } from "@/components/layout/Header";
+import { Cinzel, Crimson_Pro } from "next/font/google";
+import { Atmosphere } from "@/components/layout/Atmosphere";
 import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
+import { ParticleField } from "@/components/layout/ParticleField";
+import { ScrollFx } from "@/components/layout/ScrollFx";
+import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { site } from "@/content/site";
 import "./globals.css";
 
-// Provisional fonts; replace with the ones from the reference design in /design.
-const body = Inter({ variable: "--font-body", subsets: ["latin"] });
-const heading = Poppins({
-  variable: "--font-heading",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-});
+const body = Crimson_Pro({ variable: "--font-body", subsets: ["latin"] });
+const heading = Cinzel({ variable: "--font-heading", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -26,11 +25,19 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${body.variable} ${heading.variable}`} suppressHydrationWarning>
-      <body className="flex min-h-dvh flex-col">
+      <body>
         <ThemeProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <div className="relative flex min-h-dvh flex-col overflow-x-clip bg-(image:--gradient-page) font-sans text-fg">
+            <ParticleField />
+            <Atmosphere />
+            <ScrollProgress />
+            <Header />
+            <main id="top" className="relative z-[1] flex-1">
+              {children}
+            </main>
+            <Footer />
+          </div>
+          <ScrollFx />
         </ThemeProvider>
       </body>
     </html>

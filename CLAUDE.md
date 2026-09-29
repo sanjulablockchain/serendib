@@ -54,11 +54,10 @@ The reference design lives in `design/`. It is the source of truth: the site mus
    holds only the theme tokens and base layer. Merge classes with `cn()` from `@/lib/cn`.
 8. **Light mode and dark mode.** Everything must look right in both. The site follows the OS
    setting by default and visitors can switch with the `ThemeToggle` in the header (next-themes,
-   `data-theme` on `<html>`). Every color token has a light value in `:root` and a dark value in
-   `[data-theme="dark"]` in `globals.css`, so use tokens and colors switch on their own. When adding
+   `data-theme` on `<html>`). Every color token has a dark value in `@theme` and a light value in
+   `:root[data-theme="light"]` in `globals.css`, so use tokens and colors switch on their own. When adding
    a token, define both values. Use `dark:` classes only for things tokens cannot cover (for example
-   swapping an image or logo). Text on brand fills uses `text-on-primary` / `text-on-secondary`,
-   never `text-surface`. Check every change in both modes, with readable contrast (WCAG AA).
+   swapping an image or logo). Text on gold fills uses `text-void` or `text-on-gold`. Check every change in both modes, with readable contrast (WCAG AA).
 9. **Images optimized for fast loading.** Every image must be light and load fast on slow networks:
    - Always render with `next/image` (never a raw `<img>`). It serves AVIF / WebP at the right size.
    - Always set `sizes` for responsive images and `width` / `height` (or `fill` with a sized parent)
@@ -128,15 +127,16 @@ Conventions:
 
 ## Theme tokens
 
-Defined in `src/app/globals.css`, each color with a light and a dark value. Current values are
-provisional until extracted from `design/`.
+Defined in `src/app/globals.css`, extracted from the reference design (dark values in `@theme`, light
+values under `:root[data-theme="light"]`).
 
-- Colors: `primary`, `primary-dark`, `primary-light`, `on-primary`, `secondary`, `secondary-dark`,
-  `on-secondary`, `accent`, `ink` (headings), `body` (text), `muted`, `line` (borders), `surface`,
-  `surface-alt`, `footer`, `footer-heading`, `footer-text`, `footer-line`, `success`, `danger`
-- Fonts: `font-sans` (body), `font-display` (headings), loaded with `next/font` in `layout.tsx`
-- Radius: `rounded-card`, `rounded-pill`
-- Shadow: `shadow-card`, `shadow-nav`
+- Colors: surfaces (`page`, `canvas`, `bar`, `row-from`...), text (`fg`, `heading`, `soft`, `subtle`,
+  `fine`), gold accents (`gold`, `gold-bright`, `gold-pale`), lines (`line-soft`, `line`, `line-mid`,
+  `line-strong`), halos and shades for glows, plus static colors (`void`, `cream`, `on-gold`)
+- Fonts: `font-sans` (Crimson Pro, body), `font-display` (Cinzel, headings), loaded with `next/font`
+- Shadows: `shadow-ring`, `shadow-cta`, `shadow-medal`, `shadow-panel`... (multi ring frames and glows)
+- Gradients: `bg-(image:--gradient-page)` style tokens for gradients with more than three stops
+- Breakpoints: `xs` 520px, `nav` 820px (desktop nav), `wide` 1180px, plus Tailwind defaults
 - Width: `max-w-site` (via `Container`)
 
 ## Definition of done

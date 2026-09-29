@@ -1,6 +1,30 @@
-import { PageIntro } from "@/components/sections/PageIntro";
-import { site } from "@/content/site";
+import { AfterHours } from "@/components/sections/AfterHours";
+import { Compliance } from "@/components/sections/Compliance";
+import { Doctors } from "@/components/sections/Doctors";
+import { Hero } from "@/components/sections/Hero";
+import { MakeTheSwitch } from "@/components/sections/MakeTheSwitch";
+import { Marquee } from "@/components/sections/Marquee";
+import { News } from "@/components/sections/News";
+import { Partners } from "@/components/sections/Partners";
+import { PlanOptions } from "@/components/sections/PlanOptions";
+import { Stats } from "@/components/sections/Stats";
+import { Container } from "@/components/ui/Container";
 
 export default function HomePage() {
-  return <PageIntro title={site.tagline} description={site.description} />;
+  return (
+    <>
+      <Hero />
+      <Marquee />
+      <Container>
+        <Stats />
+        <PlanOptions />
+        <AfterHours />
+        <Doctors />
+        <Partners />
+        <Compliance />
+        <News />
+        <MakeTheSwitch />
+      </Container>
+    </>
+  );
 }
