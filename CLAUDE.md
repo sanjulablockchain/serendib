@@ -97,6 +97,7 @@ design/                    Reference HTML design (source of truth, do not edit)
 public/
   images/                  Photos and illustrations (use next/image)
   icons/                   SVG icons and logos
+  documents/               Downloadable PDFs (guidelines and procedures, UM flyers)
 scripts/                   Repo tooling (check-dashes.mjs, check-images.mjs)
 src/
   app/                     Routes only: layout, pages, metadata files

@@ -83,8 +83,8 @@ export const footerColumns: FooterColumn[] = [
     links: [
       { label: "Compliance", href: "/#compliance" },
       { label: "Guidelines & Procedures", href: "/guidelines-and-procedures" },
-      { label: "Terms of Use", href: "#" },
-      { label: "Privacy Policy", href: "#" },
+      { label: "Terms & Conditions", href: "/terms-and-conditions" },
+      { label: "Privacy Policy", href: "/privacy-policy" },
       { label: "Contact Us", href: "/contact-us" },
       { label: "Facebook", href: "https://www.facebook.com/serendibhealthways/" },
       {
