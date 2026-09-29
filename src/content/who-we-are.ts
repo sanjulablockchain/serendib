@@ -1,4 +1,4 @@
-import careImage from "../../public/images/who-care.webp";
+import careImage from "../../public/images/after-hours.webp";
 import introImage from "../../public/images/who-intro.webp";
 
 export const whoIntro = {
@@ -60,7 +60,7 @@ export const care = {
     { value: "SAME DAY", label: "WELL & SICK VISITS" },
   ],
   image: careImage,
-  imageAlt: "Pediatrician in discussion with a family",
+  imageAlt: "Pediatrician caring for a young patient",
 };
 
 export const group = {

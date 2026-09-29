@@ -48,7 +48,7 @@ export function AnytimeAnywhere() {
       </div>
 
       <div className="relative border border-line-strong bg-card-to p-3.5">
-        <div className="relative aspect-[4/5] overflow-hidden">
+        <div className="relative aspect-square overflow-hidden">
           <Image
             src={care.image}
             placeholder="blur"
