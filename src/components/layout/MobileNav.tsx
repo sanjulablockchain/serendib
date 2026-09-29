@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import type { NavLinkItem } from "@/types";
 import { cn } from "@/lib/cn";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { RoundThemeToggle } from "@/components/ui/ThemeToggle";
 
 type MobileNavProps = {
   items: NavLinkItem[];
@@ -20,7 +20,7 @@ export function MobileNav({ items, cta }: MobileNavProps) {
 
   return (
     <div className="nav:hidden">
-      <ThemeToggle className="absolute top-1/2 right-[84px] size-12 -translate-y-1/2" />
+      <RoundThemeToggle className="absolute top-1/2 right-[84px] size-12 -translate-y-1/2" />
       <button
         type="button"
         aria-expanded={open}
