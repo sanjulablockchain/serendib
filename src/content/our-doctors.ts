@@ -47,6 +47,11 @@ export const finder = {
   syncNote: "RECORDS SYNC AT EVERY CLINIC ✦",
   noResults: "No providers match that name.",
   view: "VIEW PROFILE ▸",
+  searchResults: "Search results",
+  one: "PROVIDER",
+  many: "PROVIDERS",
+  available: "AVAILABLE",
+  virtual: "VIRTUAL VISITS",
 };
 
 export const profileDialog = {
