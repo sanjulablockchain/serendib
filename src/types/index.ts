@@ -92,3 +92,33 @@ export type Provider = {
   bio: string;
   image: string | null;
 };
+
+export type ContactChannel = {
+  id: string;
+  label: string;
+  value: string;
+  glyph: string;
+  href?: string;
+};
+
+export type OfficeLocation = {
+  id: string;
+  name: string;
+  street: string;
+  city: string;
+  region: string;
+  postalCode: string;
+  lat: number;
+  lng: number;
+  zoom: number;
+  directionsHref: string;
+};
+
+export type ContactInput = { name: string; email: string; message: string };
+
+export type ContactFieldErrors = Partial<Record<keyof ContactInput, string>>;
+
+export type ContactFormState =
+  | { status: "idle" }
+  | { status: "error"; message: string; errors: ContactFieldErrors; values: ContactInput }
+  | { status: "sent"; name: string; email: string };

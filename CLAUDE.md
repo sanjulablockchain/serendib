@@ -16,6 +16,7 @@ The reference design lives in `design/`. It is the source of truth: the site mus
 | Production build | `npm run build`        |
 | Lint             | `npm run lint`         |
 | Type check       | `npm run typecheck`    |
+| Unit tests       | `npm test`             |
 | Format           | `npm run format`       |
 | Dash rule check  | `npm run check:dashes` |
 | Image rule check | `npm run check:images` |
@@ -108,7 +109,7 @@ src/
     sections/              Page sections (Hero, Services, PageIntro...). One section per file.
     ui/                    Reusable primitives (Button, Container, SectionHeading, ThemeToggle...)
   content/                 All site copy and data as typed constants (site, services, plans, partners)
-  lib/                     Helpers (cn, metadata)
+  lib/                     Helpers (cn, metadata, contact validation, mailer, rate limiter)
   types/                   Shared TypeScript types
 ```
 
@@ -138,6 +139,13 @@ values under `:root[data-theme="light"]`).
 - Gradients: `bg-(image:--gradient-page)` style tokens for gradients with more than three stops
 - Breakpoints: `xs` 520px, `nav` 820px (desktop nav), `wide` 1180px, plus Tailwind defaults
 - Width: `max-w-site` (via `Container`)
+
+## Contact form
+
+The Contact page posts to a Server Action (`src/app/(site)/contact-us/actions.ts`) that validates,
+throttles and emails through Nodemailer over SMTP. Configure `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`,
+`SMTP_PASS`, `CONTACT_TO` and `CONTACT_FROM` in `.env.local` (see `.env.example`). The map uses
+Leaflet with OpenStreetMap tiles, the only external host allowed in the CSP (`img-src`).
 
 ## Definition of done
 

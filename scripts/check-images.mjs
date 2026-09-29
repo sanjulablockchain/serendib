@@ -28,6 +28,8 @@ for (const file of walk(join(ROOT, "src"))) {
     .split("\n")
     .forEach((line, i) => {
       const where = `${rel(file)}:${i + 1}`;
+      // Map tiles from tile.openstreetmap.org are loaded at runtime by Leaflet and approved in the CSP.
+      if (line.includes("tile.openstreetmap.org")) return;
       if (EXTERNAL_SRC.test(line) || EXTERNAL_CSS_URL.test(line) || EXTERNAL_IN_DATA.test(line))
         problems.push(`${where}  external image link: ${line.trim()}`);
       if (file.endsWith(".tsx") && RAW_IMG.test(line))

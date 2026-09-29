@@ -108,6 +108,10 @@
   --color-switch-edge: #9c8048;
   --color-switch-outer: rgba(201, 164, 92, 0.45);
   --color-switch-gap: #07181e;
+  --color-amber-ring: rgba(232, 182, 74, 0.5);
+  --color-amber-glow: rgba(232, 182, 74, 0.18);
+  --color-amber-wash-from: rgba(120, 60, 10, 0.28);
+  --color-amber-wash-to: rgba(40, 20, 6, 0.2);
 
   /* Theme aware extras */
   --color-canvas: #061419;
@@ -140,6 +144,9 @@
   --color-gold-hi: #f5dc9a;
   --color-gold-mid: #c9a45c;
   --color-scrim: rgba(2, 8, 10, 0.72);
+  --color-amber-disc-from: #f7c96a;
+  --color-amber-disc-to: #c7811d;
+  --color-amber-disc-edge: #f7d58a;
 
   /* Typography (font variables are set by next/font in layout.tsx) */
   --font-sans: var(--font-body), Georgia, serif;
@@ -205,6 +212,18 @@
   --shadow-diamond: 0 0 10px var(--color-gold-bright);
   --shadow-aqua: 0 0 12px var(--color-aqua-glow);
   --shadow-aqua-soft: 0 0 12px var(--color-aqua-shadow);
+  --shadow-field-focus:
+    inset 0 0 0 1px var(--color-inset-shade), 0 0 0 1px var(--color-halo-mid),
+    0 0 18px var(--color-halo-soft);
+  --shadow-emergency:
+    0 0 0 3px var(--color-page), 0 0 0 4px var(--color-amber-ring), 0 0 30px var(--color-amber-glow);
+  --shadow-emergency-hover:
+    0 0 0 3px var(--color-page), 0 0 0 4px var(--color-amber), 0 0 40px var(--color-amber-ring);
+  --shadow-check:
+    0 0 0 4px var(--color-page), 0 0 0 5px var(--color-halo), 0 0 30px var(--color-halo-half);
+
+  /* Map tiles: dimmed in dark mode, untouched in light mode */
+  --map-filter: invert(0.92) hue-rotate(180deg) saturate(0.55) brightness(0.9) contrast(0.95);
 
   /* Gradients (used as bg-(image:--gradient-*)) */
   --gradient-page: radial-gradient(
@@ -400,6 +419,11 @@
   --color-switch-edge: #a8823e;
   --color-switch-outer: rgba(150, 118, 56, 0.45);
   --color-switch-gap: #f6eedb;
+  --color-amber-ring: rgba(154, 90, 8, 0.5);
+  --color-amber-glow: rgba(154, 90, 8, 0.16);
+  --color-amber-wash-from: rgba(232, 182, 74, 0.28);
+  --color-amber-wash-to: rgba(240, 214, 160, 0.3);
+  --map-filter: none;
 
   --color-canvas: #ece0c2;
   --color-switch-from: #f3e7c6;
