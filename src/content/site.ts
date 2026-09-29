@@ -42,11 +42,11 @@ export const mainNav: NavItem[] = [
 export const navLeft: NavItem[] = [
   { label: "HOME", href: "/" },
   { label: "WHO WE ARE", href: "/who-we-are" },
-  { label: "OUR DOCTORS", href: "/#doctors" },
+  { label: "OUR DOCTORS", href: "/our-doctors" },
 ];
 
 export const navRight: NavItem[] = [
-  { label: "OUR PARTNERS", href: "/#partners" },
+  { label: "OUR PARTNERS", href: "/our-partners" },
   { label: "COMPLIANCE", href: "/#compliance" },
   { label: "CONTACT", href: "/#switch" },
 ];
@@ -54,8 +54,8 @@ export const navRight: NavItem[] = [
 export const mobileNav: NavLinkItem[] = [
   { numeral: "I", label: "HOME", href: "/" },
   { numeral: "II", label: "WHO WE ARE", href: "/who-we-are" },
-  { numeral: "III", label: "OUR DOCTORS", href: "/#doctors" },
-  { numeral: "IV", label: "OUR PARTNERS", href: "/#partners" },
+  { numeral: "III", label: "OUR DOCTORS", href: "/our-doctors" },
+  { numeral: "IV", label: "OUR PARTNERS", href: "/our-partners" },
   { numeral: "V", label: "COMPLIANCE", href: "/#compliance" },
   { numeral: "VI", label: "NEWS & ARTICLES", href: "/#news" },
   { numeral: "VII", label: "CONTACT", href: "/#switch" },
