@@ -36,7 +36,11 @@ export function ContactLocation() {
           </Button>
         </div>
         <div className="border-t border-line-soft p-3.5 nav:border-t-0 nav:border-l">
-          <LocationMap location={location} label={contactLocation.mapLabel} />
+          <LocationMap
+            location={location}
+            label={contactLocation.mapLabel}
+            popup={contactLocation.popup}
+          />
         </div>
       </div>
     </section>
