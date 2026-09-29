@@ -1,5 +1,5 @@
 import afterHoursImage from "../../public/images/after-hours.webp";
-import heroImage from "../../public/images/hero.webp";
+import heroImage from "../../public/images/hero-family.webp";
 import autismImage from "../../public/images/news/autism.webp";
 import memberOfferImage from "../../public/images/news/member-offer.webp";
 import monkeypoxImage from "../../public/images/news/monkeypox.webp";
@@ -17,7 +17,7 @@ export const hero = {
   primaryCta: { label: "MAKE THE SWITCH", href: site.contact.transferBookingHref },
   secondaryCta: { label: "FIND A DOCTOR", href: "#doctors" },
   image: heroImage,
-  imageAlt: "Pediatrician in discussion with a family",
+  imageAlt: "Mother and two children checking in at a pediatric clinic front desk",
   imageCaption: "BOARD-CERTIFIED · 10+ YEARS EXPERIENCE",
 };
 
