@@ -48,7 +48,7 @@ export const navLeft: NavItem[] = [
 export const navRight: NavItem[] = [
   { label: "OUR PARTNERS", href: "/our-partners" },
   { label: "COMPLIANCE", href: "/#compliance" },
-  { label: "CONTACT", href: "/#switch" },
+  { label: "CONTACT", href: "/contact-us" },
 ];
 
 export const mobileNav: NavLinkItem[] = [
@@ -58,7 +58,7 @@ export const mobileNav: NavLinkItem[] = [
   { numeral: "IV", label: "OUR PARTNERS", href: "/our-partners" },
   { numeral: "V", label: "COMPLIANCE", href: "/#compliance" },
   { numeral: "VI", label: "NEWS & ARTICLES", href: "/#news" },
-  { numeral: "VII", label: "CONTACT", href: "/#switch" },
+  { numeral: "VII", label: "CONTACT", href: "/contact-us" },
 ];
 
 export const footerColumns: FooterColumn[] = [
