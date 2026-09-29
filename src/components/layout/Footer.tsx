@@ -54,7 +54,7 @@ export function Footer() {
                 <a
                   href={link.href}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="hover:text-footer-heading"
                 >
                   {link.label}

@@ -18,6 +18,9 @@ The reference design lives in `design/`. It is the source of truth: the site mus
 | Type check       | `npm run typecheck`    |
 | Format           | `npm run format`       |
 | Dash rule check  | `npm run check:dashes` |
+| Image rule check | `npm run check:images` |
+| Security audit   | `npm run check:audit`  |
+| All checks       | `npm run check`        |
 
 ## Rules (non negotiable)
 
@@ -56,6 +59,36 @@ The reference design lives in `design/`. It is the source of truth: the site mus
    a token, define both values. Use `dark:` classes only for things tokens cannot cover (for example
    swapping an image or logo). Text on brand fills uses `text-on-primary` / `text-on-secondary`,
    never `text-surface`. Check every change in both modes, with readable contrast (WCAG AA).
+9. **Images optimized for fast loading.** Every image must be light and load fast on slow networks:
+   - Always render with `next/image` (never a raw `<img>`). It serves AVIF / WebP at the right size.
+   - Always set `sizes` for responsive images and `width` / `height` (or `fill` with a sized parent)
+     so there is no layout shift.
+   - Only the first visible (above the fold) image gets `priority`; everything else lazy loads.
+   - Use `placeholder="blur"` for large photos (static imports get this for free).
+   - Before committing, resize to at most 2x the largest display size and compress. Photos as
+     `.webp` or `.jpg`, graphics and logos as optimized `.svg`. Limits: raster 300 KB, SVG 50 KB.
+   - Files in `public/images` and `public/icons` are cached for a year, so when replacing an image
+     give it a new filename.
+   - `npm run check:images` enforces size limits.
+10. **No external image links.** Every image (photos, logos, icons, backgrounds, Open Graph
+    images) is downloaded into `public/images` or `public/icons` and served from our own domain.
+    Never use a CDN, hotlink or third party URL for an image. `next.config.ts` has no
+    `remotePatterns` and the CSP only allows `img-src 'self'`, so external images will break.
+    `npm run check:images` enforces this.
+11. **Tight security, always.** Think about security in every change:
+    - Keep the security headers and CSP in `next.config.ts`. Never loosen them (new external
+      domains, `unsafe-eval` in production, removing headers) without asking the user first.
+    - No third party scripts, trackers, embeds or iframes without explicit user approval. Load
+      fonts only through `next/font` (self hosted).
+    - Never commit secrets. Keep them in `.env.local` (gitignored). Only `NEXT_PUBLIC_*` values
+      reach the browser, so never put secrets in them.
+    - Never use `dangerouslySetInnerHTML`, `eval` or unsanitized user input in the DOM.
+    - Forms: validate and sanitize on the server (Server Actions or Route Handlers), limit input
+      length, add spam protection, and never trust client side validation alone.
+    - External links use `target="_blank" rel="noopener noreferrer"`.
+    - Treat any patient or health information as sensitive: never log it, never put it in URLs.
+    - Add dependencies only when needed, prefer well maintained packages, and keep
+      `npm run check:audit` clean.
 
 ## Architecture
 
@@ -64,7 +97,7 @@ design/                    Reference HTML design (source of truth, do not edit)
 public/
   images/                  Photos and illustrations (use next/image)
   icons/                   SVG icons and logos
-scripts/                   Repo tooling (check-dashes.mjs)
+scripts/                   Repo tooling (check-dashes.mjs, check-images.mjs)
 src/
   app/                     Routes only: layout, pages, metadata files
     (site)/<page>/page.tsx Inner pages (route group, no URL segment)
@@ -108,8 +141,10 @@ provisional until extracted from `design/`.
 
 ## Definition of done
 
-- `npm run lint`, `npm run typecheck`, `npm run check:dashes` and `npm run build` all pass
+- `npm run check` and `npm run build` pass (lint, types, dashes, images, audit)
 - Visually matches `design/` at 375px, 768px and 1280px
 - Looks right in both light and dark mode
 - Only theme tokens used
+- Images are local, optimized and rendered with `next/image`
+- No new security risks; headers and CSP unchanged or approved by the user
 - Everything committed; feature worktree merged and removed

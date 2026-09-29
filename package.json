@@ -10,7 +10,10 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "next typegen && tsc --noEmit",
-    "check:dashes": "node scripts/check-dashes.mjs"
+    "check:dashes": "node scripts/check-dashes.mjs",
+    "check:images": "node scripts/check-images.mjs",
+    "check:audit": "npm audit --omit=dev --audit-level=moderate",
+    "check": "npm run lint && npm run typecheck && npm run check:dashes && npm run check:images && npm run check:audit"
   },
   "dependencies": {
     "clsx": "^2.1.1",
