@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { MobileNav } from "@/components/layout/MobileNav";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { mainNav, site } from "@/content/site";
 
 export function Header() {
@@ -28,6 +29,7 @@ export function Header() {
           <Button href={site.contact.phoneHref} className="hidden sm:inline-flex">
             {site.contact.phone}
           </Button>
+          <ThemeToggle />
           <MobileNav items={mainNav} />
         </div>
       </Container>

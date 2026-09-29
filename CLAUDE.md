@@ -49,6 +49,13 @@ The reference design lives in `design/`. It is the source of truth: the site mus
    top level folders without updating this file.
 7. **Tailwind CSS only.** No CSS modules, styled components or other CSS files. `globals.css`
    holds only the theme tokens and base layer. Merge classes with `cn()` from `@/lib/cn`.
+8. **Light mode and dark mode.** Everything must look right in both. The site follows the OS
+   setting by default and visitors can switch with the `ThemeToggle` in the header (next-themes,
+   `data-theme` on `<html>`). Every color token has a light value in `:root` and a dark value in
+   `[data-theme="dark"]` in `globals.css`, so use tokens and colors switch on their own. When adding
+   a token, define both values. Use `dark:` classes only for things tokens cannot cover (for example
+   swapping an image or logo). Text on brand fills uses `text-on-primary` / `text-on-secondary`,
+   never `text-surface`. Check every change in both modes, with readable contrast (WCAG AA).
 
 ## Architecture
 
@@ -65,9 +72,9 @@ src/
     globals.css            Tailwind import, @theme tokens, base layer
     sitemap.ts robots.ts not-found.tsx
   components/
-    layout/                Header, MobileNav, Footer (site chrome)
+    layout/                Header, MobileNav, Footer, ThemeProvider (site chrome)
     sections/              Page sections (Hero, Services, PageIntro...). One section per file.
-    ui/                    Reusable primitives (Button, Container, SectionHeading...)
+    ui/                    Reusable primitives (Button, Container, SectionHeading, ThemeToggle...)
   content/                 All site copy and data as typed constants (site, services, plans, partners)
   lib/                     Helpers (cn, metadata)
   types/                   Shared TypeScript types
@@ -88,11 +95,12 @@ Conventions:
 
 ## Theme tokens
 
-Defined in `src/app/globals.css`. Current values are provisional until extracted from `design/`.
+Defined in `src/app/globals.css`, each color with a light and a dark value. Current values are
+provisional until extracted from `design/`.
 
-- Colors: `primary`, `primary-dark`, `primary-light`, `secondary`, `secondary-dark`, `accent`,
-  `ink` (headings), `body` (text), `muted`, `line` (borders), `surface`, `surface-alt`,
-  `success`, `danger`
+- Colors: `primary`, `primary-dark`, `primary-light`, `on-primary`, `secondary`, `secondary-dark`,
+  `on-secondary`, `accent`, `ink` (headings), `body` (text), `muted`, `line` (borders), `surface`,
+  `surface-alt`, `footer`, `footer-heading`, `footer-text`, `footer-line`, `success`, `danger`
 - Fonts: `font-sans` (body), `font-display` (headings), loaded with `next/font` in `layout.tsx`
 - Radius: `rounded-card`, `rounded-pill`
 - Shadow: `shadow-card`, `shadow-nav`
@@ -102,5 +110,6 @@ Defined in `src/app/globals.css`. Current values are provisional until extracted
 
 - `npm run lint`, `npm run typecheck`, `npm run check:dashes` and `npm run build` all pass
 - Visually matches `design/` at 375px, 768px and 1280px
+- Looks right in both light and dark mode
 - Only theme tokens used
 - Everything committed; feature worktree merged and removed
