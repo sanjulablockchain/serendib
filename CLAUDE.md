@@ -16,6 +16,7 @@ The reference design lives in `design/`. It is the source of truth: the site mus
 | Production build | `npm run build`        |
 | Lint             | `npm run lint`         |
 | Type check       | `npm run typecheck`    |
+| Unit tests       | `npm test`             |
 | Format           | `npm run format`       |
 | Dash rule check  | `npm run check:dashes` |
 | Image rule check | `npm run check:images` |
