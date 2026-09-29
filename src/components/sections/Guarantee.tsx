@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { CornerFrame } from "@/components/ui/CornerFrame";
-import { guarantee } from "@/content/who-we-are";
+import { guarantee } from "@/content/shared";
 
 export function Guarantee() {
   return (

@@ -100,11 +100,6 @@ export const group = {
   ],
 };
 
-export const guarantee = {
-  text: "Our very own IPA guarantees your child is given pediatric medical care at any of our multiple locations across Los Angeles County.",
-  cta: { label: "FIND A DOCTOR", href: "/our-doctors" },
-};
-
 export const whoPartners = {
   eyebrow: "OUR PARTNERS",
   title: "The only IPA offering pediatric after-hours care.",
