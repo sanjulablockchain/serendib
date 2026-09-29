@@ -353,9 +353,10 @@ export const newsPosts: NewsPost[] = [
   },
   {
     title: "All Commercial Group Members Get 20% Off",
-    excerpt: "A special saving for every commercial group member of Serendib Healthways.",
+    excerpt:
+      "20% off out-of-pocket expenses, co-pays and deductibles for every commercial group member.",
     tag: "MEMBER OFFER",
-    href: "https://www.serendibhealthways.com/article/all-commercial-group-members-get-20-off/",
+    href: "https://www.serendibhealthways.com/all-commercial-group-members-get-20-off/",
     image: memberOfferImage,
     imageAlt: "Pediatric insurance Los Angeles",
   },
