@@ -9,14 +9,17 @@ const TILE_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 const ATTRIBUTION =
   '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors';
 
+// Leaflet's stylesheet is unlayered, so it beats Tailwind layers. The `!` modifier lets our
+// theme tokens win, so the controls follow light and dark mode.
 const chrome = [
   "[&_.leaflet-tile-pane]:[filter:var(--map-filter)]",
-  "[&_.leaflet-container]:bg-pill [&_.leaflet-container]:font-sans",
-  "[&_.leaflet-bar]:border-0 [&_.leaflet-bar]:shadow-ring",
-  "[&_.leaflet-bar_a]:border-edge [&_.leaflet-bar_a]:bg-btn-from [&_.leaflet-bar_a]:text-label",
-  "[&_.leaflet-bar_a:hover]:bg-btn-to [&_.leaflet-bar_a:hover]:text-gold-bright",
-  "[&_.leaflet-control-attribution]:bg-rail-bg [&_.leaflet-control-attribution]:text-subtle",
-  "[&_.leaflet-control-attribution_a]:text-gold-bright",
+  "[&_.leaflet-container]:bg-pill! [&_.leaflet-container]:font-sans!",
+  "[&_.leaflet-bar]:border-0! [&_.leaflet-bar]:shadow-ring!",
+  "[&_.leaflet-bar_a]:size-11! [&_.leaflet-bar_a]:border-edge! [&_.leaflet-bar_a]:bg-btn-from!",
+  "[&_.leaflet-bar_a]:text-[22px]! [&_.leaflet-bar_a]:leading-[42px]! [&_.leaflet-bar_a]:text-label!",
+  "[&_.leaflet-bar_a:hover]:bg-btn-to! [&_.leaflet-bar_a:hover]:text-gold-bright!",
+  "[&_.leaflet-control-attribution]:bg-rail-bg! [&_.leaflet-control-attribution]:text-subtle!",
+  "[&_.leaflet-control-attribution_a]:text-gold-bright!",
 ].join(" ");
 
 export function LocationMap({ location, label }: { location: OfficeLocation; label: string }) {
