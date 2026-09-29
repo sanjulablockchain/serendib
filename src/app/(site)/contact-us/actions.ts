@@ -3,13 +3,10 @@
 import { headers } from "next/headers";
 import { processContact } from "@/lib/contact-submit";
 import { sendContactEmail } from "@/lib/mailer";
-import { createRateLimiter } from "@/lib/rate-limit";
+import { createSubmitThrottle } from "@/lib/submit-throttle";
 import type { ContactFormState } from "@/types";
 
-const TEN_MINUTES = 10 * 60 * 1000;
-// Per visitor cap, plus an overall cap so a spoofed x-forwarded-for cannot bypass throttling.
-const perClient = createRateLimiter({ limit: 5, windowMs: TEN_MINUTES });
-const overall = createRateLimiter({ limit: 30, windowMs: TEN_MINUTES, maxKeys: 1 });
+const throttle = createSubmitThrottle({ perClient: 5, overall: 30, windowMs: 10 * 60 * 1000 });
 
 function logSendFailure(error: unknown) {
   // Log only the error kind. Never the message, the visitor or SMTP credentials.
@@ -30,7 +27,7 @@ export async function submitContact(
 
   return processContact(formData, {
     now: Date.now,
-    allow: () => overall.hit("all") && perClient.hit(clientKey),
+    allow: () => throttle.allow(clientKey),
     send: (input) => sendContactEmail(input),
     onSendError: logSendFailure,
   });

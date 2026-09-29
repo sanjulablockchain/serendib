@@ -36,19 +36,39 @@ describe("processContact", () => {
 
   it("pretends to succeed but sends nothing when the honeypot is filled", async () => {
     const { deps: d, send } = deps();
-    const state = await processContact(form({ ...good, website: "http://spam.example" }), d);
+    const state = await processContact(form({ ...good, hp_field: "http://spam.example" }), d);
     expect(state.status).toBe("sent");
     expect(send).not.toHaveBeenCalled();
   });
 
-  it("pretends to succeed but sends nothing when submitted too fast", async () => {
-    const { deps: d, send } = deps();
+  it("asks a too fast sender to try again instead of pretending it was sent", async () => {
+    const allow = vi.fn(() => true);
+    const { deps: d, send } = deps({ allow });
     const state = await processContact(
       form({ ...good, startedAt: String(100_000 - (MIN_FILL_MS - 1)) }),
       d,
     );
-    expect(state.status).toBe("sent");
+    expect(state.status).toBe("error");
+    if (state.status === "error") {
+      expect(state.message).toMatch(/again/i);
+      expect(state.values).toEqual(good);
+    }
     expect(send).not.toHaveBeenCalled();
+    expect(allow).not.toHaveBeenCalled();
+  });
+
+  it("does not count invalid submissions against the rate limit", async () => {
+    const allow = vi.fn(() => true);
+    const { deps: d } = deps({ allow });
+    await processContact(form({ ...good, email: "nope" }), d);
+    expect(allow).not.toHaveBeenCalled();
+  });
+
+  it("counts a real send against the rate limit exactly once", async () => {
+    const allow = vi.fn(() => true);
+    const { deps: d } = deps({ allow });
+    await processContact(form(good), d);
+    expect(allow).toHaveBeenCalledTimes(1);
   });
 
   it("sends when the fill time is long enough", async () => {

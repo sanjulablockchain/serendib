@@ -3,6 +3,7 @@
 import { useActionState, useEffect, useRef, useState } from "react";
 import { submitContact } from "@/app/(site)/contact-us/actions";
 import { contactForm } from "@/content/contact";
+import { HONEYPOT_FIELD } from "@/lib/contact-submit";
 import { CONTACT_LIMITS } from "@/lib/contact-validation";
 import { cn } from "@/lib/cn";
 import type { ContactFormState } from "@/types";
@@ -133,7 +134,7 @@ function Round({ onAnother }: { onAnother: () => void }) {
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label>
           Website
-          <input name="website" tabIndex={-1} autoComplete="off" />
+          <input name={HONEYPOT_FIELD} tabIndex={-1} autoComplete="one-time-code" />
         </label>
       </div>
 
