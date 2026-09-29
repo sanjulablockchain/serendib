@@ -27,7 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${body.variable} ${heading.variable}`} suppressHydrationWarning>
       <body>
         <ThemeProvider>
-          <div className="relative flex min-h-dvh flex-col overflow-x-clip bg-(image:--gradient-page) font-sans text-fg">
+          <div className="relative flex min-h-dvh flex-col overflow-clip bg-(image:--gradient-page) font-sans text-fg">
             <ParticleField />
             <Atmosphere />
             <ScrollProgress />
