@@ -16,12 +16,18 @@ export function Hero() {
             {hero.eyebrow}
           </span>
         </div>
-        <h1 className="m-0 text-[clamp(40px,5.2vw,68px)] leading-[1.06] font-medium text-balance text-shadow-heading">
+        <h1
+          data-parallax="0.07"
+          className="m-0 text-[clamp(40px,5.2vw,68px)] leading-[1.06] font-medium text-balance text-shadow-heading"
+        >
           {hero.titleStart}
           <span className="text-highlight">{hero.titleHighlight}</span>
           {hero.titleEnd}
         </h1>
-        <p className="m-0 max-w-[560px] text-[21px] leading-[1.55] text-pretty text-soft">
+        <p
+          data-parallax="0.04"
+          className="m-0 max-w-[560px] text-[21px] leading-[1.55] text-pretty text-soft"
+        >
           {hero.description}
         </p>
         <div className="flex flex-wrap gap-4">

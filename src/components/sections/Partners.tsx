@@ -31,7 +31,10 @@ export function Partners() {
         <span className="font-display text-[13px] tracking-[0.2em] text-subtle">
           {partnersSection.eyebrow}
         </span>
-        <h2 className="m-0 text-[clamp(28px,3.2vw,40px)] leading-[1.15] font-medium text-balance">
+        <h2
+          data-parallax="0.04"
+          className="m-0 text-[clamp(28px,3.2vw,40px)] leading-[1.15] font-medium text-balance"
+        >
           {partnersSection.title}
         </h2>
         <p className="m-0 text-[19px] leading-[1.6] text-pretty text-soft">

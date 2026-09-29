@@ -28,7 +28,7 @@ export function Header() {
             <a href={contact.textHref} className={utilityLink}>
               TEXT EN / ES {contact.text}
             </a>
-            <ThemeToggle />
+            <ThemeToggle className="-my-2.5 hidden size-11 nav:flex" />
             <a
               href={contact.messengerHref}
               {...linkProps(contact.messengerHref)}
