@@ -139,6 +139,7 @@
   --color-glow-deep-clear: rgba(40, 120, 135, 0);
   --color-gold-hi: #f5dc9a;
   --color-gold-mid: #c9a45c;
+  --color-scrim: rgba(2, 8, 10, 0.72);
 
   /* Typography (font variables are set by next/font in layout.tsx) */
   --font-sans: var(--font-body), Georgia, serif;
@@ -184,6 +185,11 @@
   --shadow-moon: 0 0 0 3px var(--color-disc-to), 0 0 0 4px var(--color-line-half);
   --shadow-avatar-lead:
     0 0 0 5px var(--color-page), 0 0 0 6px var(--color-halo), 0 0 40px var(--color-halo-lg);
+  --shadow-avatar:
+    0 0 0 4px var(--color-page), 0 0 0 5px var(--color-line), 0 0 24px var(--color-halo-faint);
+  --shadow-dialog:
+    0 0 0 4px var(--color-page), 0 0 0 5px var(--color-line), 0 40px 100px var(--color-shade-lg);
+  --shadow-field: inset 0 0 0 1px var(--color-inset-shade);
   --shadow-cat: 0 0 0 3px var(--color-page), 0 0 0 4px var(--color-line);
   --shadow-cat-on:
     0 0 0 3px var(--color-page), 0 0 0 4px var(--color-line), 0 0 22px var(--color-knob-glow);
@@ -405,6 +411,7 @@
   --color-cat-ring: #b89a5c;
   --color-cat-ring-on: #a8823e;
   --color-mote: rgb(176, 136, 58);
+  --color-scrim: rgba(60, 45, 20, 0.5);
   --color-mote-glow: rgba(201, 164, 92, 0.7);
 }
 

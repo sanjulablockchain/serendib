@@ -77,3 +77,18 @@ export type NewsPost = {
   image: StaticImageData;
   imageAlt: string;
 };
+
+export type DoctorArea = {
+  id: string;
+  name: string;
+};
+
+export type Provider = {
+  id: string;
+  name: string;
+  credentials: string;
+  areas: string[];
+  bookingUrl: string;
+  bio: string;
+  image: string | null;
+};
