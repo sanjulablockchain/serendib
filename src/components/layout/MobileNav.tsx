@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import type { NavLinkItem } from "@/types";
 import { cn } from "@/lib/cn";
+import { linkProps } from "@/lib/links";
 import { RoundThemeToggle } from "@/components/ui/ThemeToggle";
 
 type MobileNavProps = {
@@ -63,6 +64,7 @@ export function MobileNav({ items, cta }: MobileNavProps) {
           })}
           <Link
             href={cta.href}
+            {...linkProps(cta.href)}
             onClick={() => setOpen(false)}
             className="mt-2 border border-gold-pale bg-linear-to-b from-gold-soft to-gold p-[15px] text-center font-display text-[14px] tracking-[0.18em] text-void hover:text-void"
           >

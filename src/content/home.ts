@@ -4,6 +4,7 @@ import autismImage from "../../public/images/news/autism.webp";
 import memberOfferImage from "../../public/images/news/member-offer.webp";
 import monkeypoxImage from "../../public/images/news/monkeypox.webp";
 import partnersImage from "../../public/images/partners.webp";
+import { site } from "@/content/site";
 import type { ComplianceItem, Doctor, HealthPlan, NewsPost, PlanCategory, Stat } from "@/types";
 
 export const hero = {
@@ -13,7 +14,7 @@ export const hero = {
   titleEnd: " they deserve.",
   description:
     "Affordable, high-quality pediatric coverage for Los Angeles County, with access to 20+ community clinics, 50+ pediatric doctors, and a referral process reviewed by our own Pediatric Medical Directors.",
-  primaryCta: { label: "MAKE THE SWITCH", href: "#switch" },
+  primaryCta: { label: "MAKE THE SWITCH", href: site.contact.transferBookingHref },
   secondaryCta: { label: "FIND A DOCTOR", href: "#doctors" },
   image: heroImage,
   imageAlt: "Pediatrician in discussion with a family",
@@ -380,7 +381,7 @@ export const switching = {
   ],
   cta: {
     label: "BEGIN THE SWITCH",
-    href: "https://outlook.office365.com/owa/calendar/TransfersCalendar@ktdoctor.com/bookings/",
+    href: site.contact.transferBookingHref,
   },
 };
 

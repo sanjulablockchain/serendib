@@ -82,7 +82,10 @@ export function Header() {
             </span>
           </nav>
 
-          <MobileNav items={mobileNav} cta={{ label: "MAKE THE SWITCH", href: "/#switch" }} />
+          <MobileNav
+            items={mobileNav}
+            cta={{ label: "MAKE THE SWITCH", href: contact.transferBookingHref }}
+          />
         </div>
       </div>
     </header>

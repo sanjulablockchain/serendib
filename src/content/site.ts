@@ -16,6 +16,8 @@ export const site = {
     text: "818-649-3898",
     textHref: "sms:+18186493898",
     textNote: "English and Spanish",
+    transferBookingHref:
+      "https://outlook.office365.com/owa/calendar/TransfersCalendar@ktdoctor.com/bookings/",
     messengerHref: "https://m.me/serendibhealthways",
     address: {
       street: "504 S Sierra Madre Blvd",
