@@ -75,6 +75,12 @@ export const contactLocation = {
   title: "Serendib Healthways, Pasadena.",
   directions: "GET DIRECTIONS ▸",
   mapLabel: "Map showing the Serendib Healthways office in Pasadena",
+  popup: {
+    office: "Serendib Healthways",
+    title: "GET DIRECTIONS",
+    google: "GOOGLE MAPS ▸",
+    apple: "APPLE MAPS ▸",
+  },
 };
 
 // Coordinates come from a one time OpenStreetMap lookup and place the marker on the street block.
