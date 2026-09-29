@@ -77,5 +77,18 @@ export const contactLocation = {
   mapLabel: "Map showing the Serendib Healthways office in Pasadena",
 };
 
-// Coordinates are filled in Task 7 from a one time OpenStreetMap lookup.
-export const locations: OfficeLocation[] = [];
+// Coordinates come from a one time OpenStreetMap lookup and place the marker on the street block.
+export const locations: OfficeLocation[] = [
+  {
+    id: "pasadena",
+    name: "Serendib Healthways, Pasadena.",
+    street: site.contact.address.street,
+    city: site.contact.address.city,
+    region: site.contact.address.region,
+    postalCode: site.contact.address.postalCode,
+    lat: 34.1406885,
+    lng: -118.1015285,
+    zoom: 16,
+    directionsHref: "https://www.openstreetmap.org/directions?route=%3B34.1406885%2C-118.1015285",
+  },
+];

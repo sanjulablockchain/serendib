@@ -3,12 +3,13 @@ import type { NextConfig } from "next";
 const isDev = process.env.NODE_ENV === "development";
 
 // Static CSP (no nonces) so pages stay prerendered and fast. Everything is served from our own
-// origin: no external scripts, images, fonts or frames. See CLAUDE.md rules 10 and 11.
+// origin, except OpenStreetMap map tiles (img-src only, approved for the Contact page map). No
+// external scripts, fonts or frames. See CLAUDE.md rules 10 and 11.
 const contentSecurityPolicy = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' blob: data:",
+  "img-src 'self' blob: data: https://tile.openstreetmap.org",
   "font-src 'self'",
   `connect-src 'self'${isDev ? " ws:" : ""}`,
   "object-src 'none'",

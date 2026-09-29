@@ -1,4 +1,5 @@
 import { ContactHero } from "@/components/sections/ContactHero";
+import { ContactLocation } from "@/components/sections/ContactLocation";
 import { ContactMessage } from "@/components/sections/ContactMessage";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -14,6 +15,7 @@ export default function ContactUsPage() {
     <>
       <ContactHero />
       <ContactMessage />
+      <ContactLocation />
     </>
   );
 }
