@@ -80,14 +80,10 @@ Failure modes the spec implies but no obvious task test covers, most likely firs
 **Interfaces:**
 - Produces: `npm test` runs Vitest once over `src/**/*.test.ts` with the `@/` alias. `nodemailer` and `leaflet` are installed.
 
-- [ ] **Step 1: Commit this plan on main, then create the worktree**
+- [ ] **Step 1: Create the worktree (the plan and spec are already committed on main)**
 
 ```bash
 cd /c/dev/serendib
-git add docs/superpowers/plans/2026-09-29-contact-page.md
-git commit -m "docs: add Contact Us page implementation plan
-
-Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
 git worktree add .worktrees/contact-page -b feat/contact-page
 cd .worktrees/contact-page && npm install
 ```
@@ -960,7 +956,6 @@ export async function processContact(
   if (text(formData, "website")) return fake();
 
   const checked = validateContact(raw);
-  const blank = { name: "", email: "", message: "" };
 
   if (!deps.allow()) {
     return {
@@ -978,7 +973,7 @@ export async function processContact(
       status: "error",
       message: "Please check the highlighted fields.",
       errors: checked.errors,
-      values: checked.values ?? blank,
+      values: checked.values,
     };
   }
 
@@ -1014,7 +1009,7 @@ import type { ContactFormState } from "@/types";
 const TEN_MINUTES = 10 * 60 * 1000;
 // Per visitor cap, plus a global cap so a spoofed x-forwarded-for cannot bypass throttling.
 const perClient = createRateLimiter({ limit: 5, windowMs: TEN_MINUTES });
-const global = createRateLimiter({ limit: 30, windowMs: TEN_MINUTES, maxKeys: 1 });
+const overall = createRateLimiter({ limit: 30, windowMs: TEN_MINUTES, maxKeys: 1 });
 
 function logSendFailure(error: unknown) {
   // Log only the error kind. Never the message, the visitor or SMTP credentials.
@@ -1033,7 +1028,7 @@ export async function submitContact(
 
   return processContact(formData, {
     now: Date.now,
-    allow: () => global.hit("all") && perClient.hit(clientKey),
+    allow: () => overall.hit("all") && perClient.hit(clientKey),
     send: (input) => sendContactEmail(input),
     onSendError: logSendFailure,
   });
@@ -1061,7 +1056,7 @@ git commit -m "feat: add contact form submit flow and server action
 Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
 ```
 
-Expected: every test passes. If typecheck complains about the `global` name shadowing Node's `global`, rename it to `overall`.
+Expected: every test passes.
 
 ---
 
