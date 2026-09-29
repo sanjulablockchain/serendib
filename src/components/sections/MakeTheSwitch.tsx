@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { linkProps } from "@/lib/links";
-import { Rail } from "@/components/ui/Rail";
 import { switching } from "@/content/home";
 
 const action =
@@ -29,7 +28,6 @@ export function MakeTheSwitch() {
               </p>
             ))}
           </div>
-          <Rail thumbClassName="top-0.5 h-[38%]" />
         </div>
 
         <div className="h-px bg-linear-to-r from-gold-clear via-line-strong to-gold-clear" />
