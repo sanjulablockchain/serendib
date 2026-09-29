@@ -118,6 +118,28 @@ export type ContactInput = { name: string; email: string; message: string };
 
 export type ContactFieldErrors = Partial<Record<keyof ContactInput, string>>;
 
+export type LegalSection = {
+  heading: string;
+  paragraphs?: string[];
+  items?: { term?: string; text: string }[];
+  /** Paragraphs shown after the list. */
+  closing?: string[];
+};
+
+export type LegalDocument = {
+  title: string;
+  effectiveDate: string;
+  intro: string;
+  sections: LegalSection[];
+};
+
+export type GuidelineDocument = {
+  title: string;
+  year: string;
+  description: string;
+  href: string;
+};
+
 export type ContactFormState =
   | { status: "idle" }
   | { status: "error"; message: string; errors: ContactFieldErrors; values: ContactInput }
