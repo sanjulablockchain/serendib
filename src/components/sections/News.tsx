@@ -31,7 +31,9 @@ export function News() {
                 alt={post.imageAlt}
                 fill
                 sizes="(min-width: 1320px) 420px, (min-width: 820px) 33vw, 100vw"
-                className="object-cover"
+                data-parallax="-0.08"
+                data-pbase="scale(1.2)"
+                className="[transform:scale(1.2)] object-cover"
               />
               <span className="absolute top-3 left-3 bg-linear-to-b from-gold-soft to-gold px-2.5 py-1.5 font-display text-[11px] tracking-[0.16em] text-void">
                 {post.tag}

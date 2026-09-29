@@ -218,7 +218,6 @@ const areaEntries: [string, string][] = [
   ["Van Nuys", "van"],
   ["West Hills", "west"],
   ["Whittier", "whittier"],
-  ["La Mirada", "lamirada"],
 ];
 
 export const areas = areaEntries.map(([name, id]) => ({ name, href: `/our-doctors#${id}` }));
@@ -378,7 +377,10 @@ export const switching = {
     { label: "TEXT US · ENGLISH / ESPAÑOL · 818-649-3898", href: "sms:+18186493898" },
     { label: "MESSENGER CHAT · EN / ES", href: "https://m.me/serendibhealthways" },
   ],
-  cta: { label: "BEGIN THE SWITCH", href: "/contact-us" },
+  cta: {
+    label: "BEGIN THE SWITCH",
+    href: "https://outlook.office365.com/owa/calendar/TransfersCalendar@ktdoctor.com/bookings/",
+  },
 };
 
 export const footerActions = {

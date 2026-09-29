@@ -22,8 +22,13 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div className={cn("flex flex-col gap-2.5", className)}>
-      <span className="font-display text-[13px] tracking-[0.2em] text-subtle">{eyebrow}</span>
-      <h2 className={cn(sizes[size], "m-0 leading-[1.15] font-medium", balance && "text-balance")}>
+      <span data-parallax="0.08" className="font-display text-[13px] tracking-[0.2em] text-subtle">
+        {eyebrow}
+      </span>
+      <h2
+        data-parallax="0.04"
+        className={cn(sizes[size], "m-0 leading-[1.15] font-medium", balance && "text-balance")}
+      >
         {title}
       </h2>
     </div>
