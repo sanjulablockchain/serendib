@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { site } from "@/content/site";
 import "./globals.css";
 
@@ -24,11 +25,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${body.variable} ${heading.variable}`}>
+    <html lang="en" className={`${body.variable} ${heading.variable}`} suppressHydrationWarning>
       <body className="flex min-h-dvh flex-col">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <ThemeProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

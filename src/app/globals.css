@@ -1,30 +1,106 @@
 @import "tailwindcss";
 
+/* Dark mode is driven by data-theme on <html> (set by next-themes, defaults to the OS setting). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 /*
  * Theme tokens. Components must use these (bg-primary, text-ink, rounded-card...)
  * and never raw hex values or arbitrary colors.
+ * Every color token has a light value (:root) and a dark value ([data-theme="dark"]),
+ * so components switch automatically and rarely need dark: overrides.
  * Values are provisional until extracted from the reference design in /design.
  */
-@theme {
+:root {
+  color-scheme: light;
+
   /* Brand */
-  --color-primary: #0b6fb8;
-  --color-primary-dark: #084f85;
-  --color-primary-light: #e6f1fa;
-  --color-secondary: #2bb3a3;
-  --color-secondary-dark: #1e8a7d;
-  --color-accent: #f5a623;
+  --primary: #0b6fb8;
+  --primary-dark: #084f85;
+  --primary-light: #e6f1fa;
+  --on-primary: #ffffff;
+  --secondary: #2bb3a3;
+  --secondary-dark: #1e8a7d;
+  --on-secondary: #ffffff;
+  --accent: #f5a623;
 
   /* Neutrals */
-  --color-ink: #10223a;
-  --color-body: #475569;
-  --color-muted: #94a3b8;
-  --color-line: #e2e8f0;
-  --color-surface: #ffffff;
-  --color-surface-alt: #f6f9fc;
+  --ink: #10223a;
+  --body: #475569;
+  --muted: #94a3b8;
+  --line: #e2e8f0;
+  --surface: #ffffff;
+  --surface-alt: #f6f9fc;
+
+  /* Footer */
+  --footer: #10223a;
+  --footer-heading: #ffffff;
+  --footer-text: #94a3b8;
+  --footer-line: #2a3b52;
 
   /* Feedback */
-  --color-success: #16a34a;
-  --color-danger: #dc2626;
+  --success: #16a34a;
+  --danger: #dc2626;
+
+  /* Elevation */
+  --shadow-card-color: rgb(16 34 58 / 0.18);
+  --shadow-nav-color: rgb(16 34 58 / 0.08);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --primary: #4aa3e8;
+  --primary-dark: #7bbdf0;
+  --primary-light: #13304a;
+  --on-primary: #06121f;
+  --secondary: #3cc9b8;
+  --secondary-dark: #6ad8cb;
+  --on-secondary: #06121f;
+  --accent: #f7b84b;
+
+  --ink: #f1f5f9;
+  --body: #cbd5e1;
+  --muted: #8a9ab0;
+  --line: #243449;
+  --surface: #0b1624;
+  --surface-alt: #111f31;
+
+  --footer: #060e18;
+  --footer-heading: #f1f5f9;
+  --footer-text: #8a9ab0;
+  --footer-line: #1c2a3c;
+
+  --success: #22c55e;
+  --danger: #f87171;
+
+  --shadow-card-color: rgb(0 0 0 / 0.5);
+  --shadow-nav-color: rgb(0 0 0 / 0.4);
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-on-primary: var(--on-primary);
+  --color-secondary: var(--secondary);
+  --color-secondary-dark: var(--secondary-dark);
+  --color-on-secondary: var(--on-secondary);
+  --color-accent: var(--accent);
+
+  --color-ink: var(--ink);
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+
+  --color-footer: var(--footer);
+  --color-footer-heading: var(--footer-heading);
+  --color-footer-text: var(--footer-text);
+  --color-footer-line: var(--footer-line);
+
+  --color-success: var(--success);
+  --color-danger: var(--danger);
 
   /* Typography (font variables are set by next/font in layout.tsx) */
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
@@ -35,8 +111,8 @@
   --radius-pill: 9999px;
 
   /* Elevation */
-  --shadow-card: 0 10px 30px -12px rgb(16 34 58 / 0.18);
-  --shadow-nav: 0 2px 12px rgb(16 34 58 / 0.08);
+  --shadow-card: 0 10px 30px -12px var(--shadow-card-color);
+  --shadow-nav: 0 2px 12px var(--shadow-nav-color);
 
   /* Layout */
   --container-site: 80rem;
@@ -48,7 +124,7 @@
   }
 
   body {
-    @apply bg-surface font-sans text-body antialiased;
+    @apply bg-surface font-sans text-body antialiased transition-colors;
   }
 
   h1,
