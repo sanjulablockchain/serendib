@@ -1,8 +1,19 @@
-import { PageIntro } from "@/components/sections/PageIntro";
+import { ContactHero } from "@/components/sections/ContactHero";
+import { ContactMessage } from "@/components/sections/ContactMessage";
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata = pageMetadata({ title: "Contact Us", path: "/contact-us" });
+export const metadata = pageMetadata({
+  title: "Contact Us",
+  description:
+    "Send Serendib Healthways a message, call, text or email our team, or find our Pasadena office.",
+  path: "/contact-us",
+});
 
 export default function ContactUsPage() {
-  return <PageIntro title="Contact Us" />;
+  return (
+    <>
+      <ContactHero />
+      <ContactMessage />
+    </>
+  );
 }
