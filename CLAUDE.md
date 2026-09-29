@@ -88,14 +88,17 @@ Conventions:
 
 ## Theme tokens
 
-Defined in `src/app/globals.css`. Current values are provisional until extracted from `design/`.
+Defined in `src/app/globals.css`, extracted from the reference design (dark by default, with a light
+theme that overrides the same color tokens under `html[data-theme="light"]`). Never use `dark:`
+variants; the tokens switch themselves.
 
-- Colors: `primary`, `primary-dark`, `primary-light`, `secondary`, `secondary-dark`, `accent`,
-  `ink` (headings), `body` (text), `muted`, `line` (borders), `surface`, `surface-alt`,
-  `success`, `danger`
-- Fonts: `font-sans` (body), `font-display` (headings), loaded with `next/font` in `layout.tsx`
-- Radius: `rounded-card`, `rounded-pill`
-- Shadow: `shadow-card`, `shadow-nav`
+- Colors: surfaces (`page`, `canvas`, `bar`, `row-from`...), text (`fg`, `heading`, `soft`, `subtle`,
+  `fine`), gold accents (`gold`, `gold-bright`, `gold-pale`), lines (`line-soft`, `line`, `line-mid`,
+  `line-strong`), halos and shades for glows, plus static colors (`void`, `cream`, `on-gold`)
+- Fonts: `font-sans` (Crimson Pro, body), `font-display` (Cinzel, headings), loaded with `next/font`
+- Shadows: `shadow-ring`, `shadow-cta`, `shadow-medal`, `shadow-panel`... (multi ring frames and glows)
+- Gradients: `bg-(image:--gradient-page)` style tokens for gradients with more than three stops
+- Breakpoints: `xs` 520px, `nav` 820px (desktop nav), `wide` 1180px, plus Tailwind defaults
 - Width: `max-w-site` (via `Container`)
 
 ## Definition of done
