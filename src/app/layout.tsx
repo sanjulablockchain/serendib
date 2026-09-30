@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cinzel, Crimson_Pro } from "next/font/google";
 import { Atmosphere } from "@/components/layout/Atmosphere";
+import { FloatingActions } from "@/components/layout/FloatingActions";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ParticleField } from "@/components/layout/ParticleField";
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </main>
             <Footer />
           </div>
+          <FloatingActions />
           <ScrollFx />
         </ThemeProvider>
       </body>
