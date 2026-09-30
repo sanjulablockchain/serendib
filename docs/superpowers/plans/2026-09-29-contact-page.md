@@ -44,40 +44,42 @@ Failure modes the spec implies but no obvious task test covers, most likely firs
 
 ## File Structure
 
-| File | Responsibility |
-| ---- | -------------- |
-| `vitest.config.ts` | Vitest config with the `@` alias |
-| `src/types/index.ts` (modify) | `ContactChannel`, `OfficeLocation`, `ContactInput`, `ContactFieldErrors`, `ContactFormState` |
-| `src/content/contact.ts` | All page copy, channels, locations |
-| `src/lib/contact-validation.ts` | `validateContact`, `CONTACT_LIMITS` (pure) |
-| `src/lib/rate-limit.ts` | `createRateLimiter` (pure, in memory) |
-| `src/lib/mailer.ts` | `readMailConfig`, `buildMessage`, `sendContactEmail` |
-| `src/lib/contact-submit.ts` | `processContact` orchestration with injected dependencies |
-| `src/app/(site)/contact-us/actions.ts` | `submitContact` Server Action, real wiring |
-| `src/components/ui/ChannelRow.tsx` | Reusable channel row |
-| `src/components/ui/EmergencyCard.tsx` | Emergency line card |
-| `src/components/ui/ContactForm.tsx` | Client form, sent state, "send another" |
-| `src/components/ui/LocationMap.tsx` | Client Leaflet map |
-| `src/components/sections/ContactHero.tsx` | Hero |
-| `src/components/sections/ContactMessage.tsx` | Form panel and channels column |
-| `src/components/sections/ContactLocation.tsx` | Location panel |
-| `src/app/(site)/contact-us/page.tsx` (modify) | Composition and metadata |
-| `src/app/globals.css` (modify) | New tokens |
-| `next.config.ts` (modify) | `img-src` gains the OSM tile host |
-| `scripts/check-images.mjs` (modify) | Allow the OSM tile URL template |
-| `public/icons/leaflet/*` | Marker images |
-| `.env.example` | Documented SMTP variables |
-| `CLAUDE.md` (modify) | `npm test` row, `contact` content note |
+| File                                          | Responsibility                                                                               |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `vitest.config.ts`                            | Vitest config with the `@` alias                                                             |
+| `src/types/index.ts` (modify)                 | `ContactChannel`, `OfficeLocation`, `ContactInput`, `ContactFieldErrors`, `ContactFormState` |
+| `src/content/contact.ts`                      | All page copy, channels, locations                                                           |
+| `src/lib/contact-validation.ts`               | `validateContact`, `CONTACT_LIMITS` (pure)                                                   |
+| `src/lib/rate-limit.ts`                       | `createRateLimiter` (pure, in memory)                                                        |
+| `src/lib/mailer.ts`                           | `readMailConfig`, `buildMessage`, `sendContactEmail`                                         |
+| `src/lib/contact-submit.ts`                   | `processContact` orchestration with injected dependencies                                    |
+| `src/app/(site)/contact-us/actions.ts`        | `submitContact` Server Action, real wiring                                                   |
+| `src/components/ui/ChannelRow.tsx`            | Reusable channel row                                                                         |
+| `src/components/ui/EmergencyCard.tsx`         | Emergency line card                                                                          |
+| `src/components/ui/ContactForm.tsx`           | Client form, sent state, "send another"                                                      |
+| `src/components/ui/LocationMap.tsx`           | Client Leaflet map                                                                           |
+| `src/components/sections/ContactHero.tsx`     | Hero                                                                                         |
+| `src/components/sections/ContactMessage.tsx`  | Form panel and channels column                                                               |
+| `src/components/sections/ContactLocation.tsx` | Location panel                                                                               |
+| `src/app/(site)/contact-us/page.tsx` (modify) | Composition and metadata                                                                     |
+| `src/app/globals.css` (modify)                | New tokens                                                                                   |
+| `next.config.ts` (modify)                     | `img-src` gains the OSM tile host                                                            |
+| `scripts/check-images.mjs` (modify)           | Allow the OSM tile URL template                                                              |
+| `public/icons/leaflet/*`                      | Marker images                                                                                |
+| `.env.example`                                | Documented SMTP variables                                                                    |
+| `CLAUDE.md` (modify)                          | `npm test` row, `contact` content note                                                       |
 
 ---
 
 ### Task 1: Worktree, dependencies and test runner
 
 **Files:**
+
 - Create: `vitest.config.ts`, `src/lib/smoke.test.ts` (deleted at the end of the task)
 - Modify: `package.json`, `CLAUDE.md`
 
 **Interfaces:**
+
 - Produces: `npm test` runs Vitest once over `src/**/*.test.ts` with the `@/` alias. `nodemailer` and `leaflet` are installed.
 
 - [ ] **Step 1: Create the worktree (the plan and spec are already committed on main)**
@@ -170,10 +172,12 @@ Expected: audit reports no vulnerabilities at moderate or above. If it does, sto
 ### Task 2: Types and form validation
 
 **Files:**
+
 - Modify: `src/types/index.ts`
 - Create: `src/lib/contact-validation.ts`, `src/lib/contact-validation.test.ts`
 
 **Interfaces:**
+
 - Produces (types, exported from `@/types`):
 
 ```ts
@@ -190,8 +194,12 @@ export type ContactFormState =
 ```ts
 export const CONTACT_LIMITS: { readonly name: 100; readonly email: 254; readonly message: 2000 };
 export function validateContact(raw: {
-  name: unknown; email: unknown; message: unknown;
-}): { ok: true; value: ContactInput } | { ok: false; errors: ContactFieldErrors; values: ContactInput };
+  name: unknown;
+  email: unknown;
+  message: unknown;
+}):
+  | { ok: true; value: ContactInput }
+  | { ok: false; errors: ContactFieldErrors; values: ContactInput };
 ```
 
 `values` on failure are the sanitized strings, safe to echo back into the form.
@@ -294,9 +302,15 @@ describe("validateContact", () => {
   });
 
   it("enforces the message limit exactly, counting emoji as one character", () => {
-    expect(validateContact({ ...valid, message: "a".repeat(CONTACT_LIMITS.message) }).ok).toBe(true);
-    expect(validateContact({ ...valid, message: "😀".repeat(CONTACT_LIMITS.message) }).ok).toBe(true);
-    expect(fail({ ...valid, message: "a".repeat(CONTACT_LIMITS.message + 1) }).errors.message).toBeDefined();
+    expect(validateContact({ ...valid, message: "a".repeat(CONTACT_LIMITS.message) }).ok).toBe(
+      true,
+    );
+    expect(validateContact({ ...valid, message: "😀".repeat(CONTACT_LIMITS.message) }).ok).toBe(
+      true,
+    );
+    expect(
+      fail({ ...valid, message: "a".repeat(CONTACT_LIMITS.message + 1) }).errors.message,
+    ).toBeDefined();
   });
 
   it("enforces name and email limits", () => {
@@ -353,7 +367,11 @@ function cleanMessage(value: unknown) {
   return asText(value).replace(/\r\n?/g, "\n").replace(MESSAGE_CONTROL, "").trim();
 }
 
-export function validateContact(raw: { name: unknown; email: unknown; message: unknown }):
+export function validateContact(raw: {
+  name: unknown;
+  email: unknown;
+  message: unknown;
+}):
   | { ok: true; value: ContactInput }
   | { ok: false; errors: ContactFieldErrors; values: ContactInput } {
   const values: ContactInput = {
@@ -400,9 +418,11 @@ Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
 ### Task 3: Rate limiter
 
 **Files:**
+
 - Create: `src/lib/rate-limit.ts`, `src/lib/rate-limit.test.ts`
 
 **Interfaces:**
+
 - Produces:
 
 ```ts
@@ -411,7 +431,11 @@ export type RateLimiter = {
   hit(key: string, now?: number): boolean;
   size(): number;
 };
-export function createRateLimiter(options: { limit: number; windowMs: number; maxKeys?: number }): RateLimiter;
+export function createRateLimiter(options: {
+  limit: number;
+  windowMs: number;
+  maxKeys?: number;
+}): RateLimiter;
 ```
 
 - [ ] **Step 1: Write the failing tests**
@@ -529,21 +553,35 @@ Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
 ### Task 4: Mailer
 
 **Files:**
+
 - Create: `src/lib/mailer.ts`, `src/lib/mailer.test.ts`, `.env.example`
 - Modify: `.gitignore` only if `.env.example` is ignored (check in Step 6)
 
 **Interfaces:**
+
 - Consumes: `ContactInput` from `@/types`.
 - Produces:
 
 ```ts
 export type MailConfig = {
-  host: string; port: number; secure: boolean; requireTLS: boolean;
-  user?: string; pass?: string; to: string; from: string;
+  host: string;
+  port: number;
+  secure: boolean;
+  requireTLS: boolean;
+  user?: string;
+  pass?: string;
+  to: string;
+  from: string;
 };
 export function readMailConfig(env: Record<string, string | undefined>): MailConfig | null;
-export function buildMessage(input: ContactInput, config: Pick<MailConfig, "to" | "from">): SendMailOptions;
-export async function sendContactEmail(input: ContactInput, env?: Record<string, string | undefined>): Promise<void>;
+export function buildMessage(
+  input: ContactInput,
+  config: Pick<MailConfig, "to" | "from">,
+): SendMailOptions;
+export async function sendContactEmail(
+  input: ContactInput,
+  env?: Record<string, string | undefined>,
+): Promise<void>;
 ```
 
 `sendContactEmail` throws `Error("Mail is not configured")` when `readMailConfig` returns `null`. `SendMailOptions` is imported from `nodemailer`.
@@ -595,9 +633,12 @@ describe("readMailConfig", () => {
     expect(config?.pass).toBeUndefined();
   });
 
-  it.each(["SMTP_HOST", "SMTP_PORT", "CONTACT_TO", "CONTACT_FROM"])("returns null without %s", (key) => {
-    expect(readMailConfig({ ...env, [key]: undefined })).toBeNull();
-  });
+  it.each(["SMTP_HOST", "SMTP_PORT", "CONTACT_TO", "CONTACT_FROM"])(
+    "returns null without %s",
+    (key) => {
+      expect(readMailConfig({ ...env, [key]: undefined })).toBeNull();
+    },
+  );
 
   it("returns null for a bad port", () => {
     expect(readMailConfig({ ...env, SMTP_PORT: "abc" })).toBeNull();
@@ -615,12 +656,13 @@ describe("buildMessage", () => {
   it("sets a fixed sender, the team recipient and the visitor as reply to", () => {
     const message = buildMessage(input, { to: "team@example.com", from: "website@example.com" });
     expect(message.to).toBe("team@example.com");
-    expect(message.from).toEqual({ name: "Serendib Healthways website", address: "website@example.com" });
+    expect(message.from).toEqual({
+      name: "Serendib Healthways website",
+      address: "website@example.com",
+    });
     expect(message.replyTo).toEqual({ name: "Nimal Perera", address: "nimal@example.com" });
     expect(message.subject).toBe("Website contact: Nimal Perera");
-    expect(message.text).toBe(
-      "Name: Nimal Perera\nEmail: nimal@example.com\n\nLine one\nLine two",
-    );
+    expect(message.text).toBe("Name: Nimal Perera\nEmail: nimal@example.com\n\nLine one\nLine two");
   });
 
   it("never lets line breaks reach the subject or reply to name", () => {
@@ -706,10 +748,7 @@ export function buildMessage(
   };
 }
 
-export async function sendContactEmail(
-  input: ContactInput,
-  env: Env = process.env,
-): Promise<void> {
+export async function sendContactEmail(input: ContactInput, env: Env = process.env): Promise<void> {
   const config = readMailConfig(env);
   if (!config) throw new Error("Mail is not configured");
 
@@ -774,9 +813,11 @@ Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
 ### Task 5: Submit orchestration and Server Action
 
 **Files:**
+
 - Create: `src/lib/contact-submit.ts`, `src/lib/contact-submit.test.ts`, `src/app/(site)/contact-us/actions.ts`
 
 **Interfaces:**
+
 - Consumes: `validateContact` (Task 2), `createRateLimiter` (Task 3), `sendContactEmail` (Task 4), `ContactFormState` and `ContactInput` from `@/types`.
 - Produces:
 
@@ -788,7 +829,10 @@ export type ContactDeps = {
   send: (input: ContactInput) => Promise<void>;
   onSendError?: (error: unknown) => void;
 };
-export async function processContact(formData: FormData, deps: ContactDeps): Promise<ContactFormState>;
+export async function processContact(
+  formData: FormData,
+  deps: ContactDeps,
+): Promise<ContactFormState>;
 ```
 
 Form field names: `name`, `email`, `message`, honeypot `website`, timing `startedAt` (milliseconds since epoch as a string).
@@ -811,7 +855,9 @@ function form(fields: Record<string, string>) {
 
 const good = { name: "Nimal Perera", email: "nimal@example.com", message: "Hello there" };
 
-function deps(overrides: Partial<ContactDeps> = {}): ContactDeps & { send: ReturnType<typeof vi.fn> } {
+function deps(
+  overrides: Partial<ContactDeps> = {},
+): ContactDeps & { send: ReturnType<typeof vi.fn> } {
   return {
     now: () => 100_000,
     allow: () => true,
@@ -848,7 +894,10 @@ describe("processContact", () => {
 
   it("pretends to succeed but sends nothing when submitted too fast", async () => {
     const d = deps();
-    const state = await processContact(form({ ...good, startedAt: String(100_000 - (MIN_FILL_MS - 1)) }), d);
+    const state = await processContact(
+      form({ ...good, startedAt: String(100_000 - (MIN_FILL_MS - 1)) }),
+      d,
+    );
     expect(state.status).toBe("sent");
     expect(d.send).not.toHaveBeenCalled();
   });
@@ -1014,7 +1063,9 @@ const overall = createRateLimiter({ limit: 30, windowMs: TEN_MINUTES, maxKeys: 1
 function logSendFailure(error: unknown) {
   // Log only the error kind. Never the message, the visitor or SMTP credentials.
   const code =
-    error instanceof Error && "code" in error ? String((error as { code: unknown }).code) : "unknown";
+    error instanceof Error && "code" in error
+      ? String((error as { code: unknown }).code)
+      : "unknown";
   console.error(`contact form: send failed (${code})`);
 }
 
@@ -1040,12 +1091,12 @@ export async function submitContact(
 Add to `src/lib/rate-limit.test.ts` inside the describe block:
 
 ```ts
-  it("supports a single key global cap", () => {
-    const limiter = createRateLimiter({ limit: 2, windowMs: 1000, maxKeys: 1 });
-    expect(limiter.hit("all", 0)).toBe(true);
-    expect(limiter.hit("all", 1)).toBe(true);
-    expect(limiter.hit("all", 2)).toBe(false);
-  });
+it("supports a single key global cap", () => {
+  const limiter = createRateLimiter({ limit: 2, windowMs: 1000, maxKeys: 1 });
+  expect(limiter.hit("all", 0)).toBe(true);
+  expect(limiter.hit("all", 1)).toBe(true);
+  expect(limiter.hit("all", 2)).toBe(false);
+});
 ```
 
 ```bash
@@ -1063,11 +1114,13 @@ Expected: every test passes.
 ### Task 6: Tokens, content and the form UI
 
 **Files:**
+
 - Modify: `src/app/globals.css`
 - Create: `src/content/contact.ts`, `src/components/ui/ChannelRow.tsx`, `src/components/ui/EmergencyCard.tsx`, `src/components/ui/ContactForm.tsx`, `src/components/sections/ContactHero.tsx`, `src/components/sections/ContactMessage.tsx`
 - Modify: `src/app/(site)/contact-us/page.tsx`
 
 **Interfaces:**
+
 - Consumes: `ContactChannel`, `ContactFormState` from `@/types`; `submitContact` from `./actions`; `Container`, `CornerFrame`, `linkProps`, `hitArea`, `cn`, `site.contact`.
 - Produces (`@/content/contact`): `contactHero`, `contactForm`, `contactChannels: ContactChannel[]`, `emergencyLine`, `contactLocation`, `locations: OfficeLocation[]` (locations added in Task 7).
 
@@ -1076,48 +1129,48 @@ Expected: every test passes.
 In `src/app/globals.css`, inside `@theme`, after `--color-switch-gap: #07181e;` add:
 
 ```css
-  --color-amber-ring: rgba(232, 182, 74, 0.5);
-  --color-amber-glow: rgba(232, 182, 74, 0.18);
-  --color-amber-wash-from: rgba(120, 60, 10, 0.28);
-  --color-amber-wash-to: rgba(40, 20, 6, 0.2);
+--color-amber-ring: rgba(232, 182, 74, 0.5);
+--color-amber-glow: rgba(232, 182, 74, 0.18);
+--color-amber-wash-from: rgba(120, 60, 10, 0.28);
+--color-amber-wash-to: rgba(40, 20, 6, 0.2);
 ```
 
 After `--color-scrim: rgba(2, 8, 10, 0.72);` (static colors) add:
 
 ```css
-  --color-amber-disc-from: #f7c96a;
-  --color-amber-disc-to: #c7811d;
-  --color-amber-disc-edge: #f7d58a;
+--color-amber-disc-from: #f7c96a;
+--color-amber-disc-to: #c7811d;
+--color-amber-disc-edge: #f7d58a;
 ```
 
 After `--shadow-aqua-soft: ...;` add:
 
 ```css
-  --shadow-field-focus:
-    inset 0 0 0 1px var(--color-inset-shade), 0 0 0 1px var(--color-halo-mid),
-    0 0 18px var(--color-halo-soft);
-  --shadow-emergency:
-    0 0 0 3px var(--color-page), 0 0 0 4px var(--color-amber-ring), 0 0 30px var(--color-amber-glow);
-  --shadow-emergency-hover:
-    0 0 0 3px var(--color-page), 0 0 0 4px var(--color-amber), 0 0 40px var(--color-amber-ring);
-  --shadow-check:
-    0 0 0 4px var(--color-page), 0 0 0 5px var(--color-halo), 0 0 30px var(--color-halo-half);
+--shadow-field-focus:
+  inset 0 0 0 1px var(--color-inset-shade), 0 0 0 1px var(--color-halo-mid),
+  0 0 18px var(--color-halo-soft);
+--shadow-emergency:
+  0 0 0 3px var(--color-page), 0 0 0 4px var(--color-amber-ring), 0 0 30px var(--color-amber-glow);
+--shadow-emergency-hover:
+  0 0 0 3px var(--color-page), 0 0 0 4px var(--color-amber), 0 0 40px var(--color-amber-ring);
+--shadow-check:
+  0 0 0 4px var(--color-page), 0 0 0 5px var(--color-halo), 0 0 30px var(--color-halo-half);
 ```
 
 Also add the map filter token (after the shadows, before gradients):
 
 ```css
-  --map-filter: invert(0.92) hue-rotate(180deg) saturate(0.55) brightness(0.9) contrast(0.95);
+--map-filter: invert(0.92) hue-rotate(180deg) saturate(0.55) brightness(0.9) contrast(0.95);
 ```
 
 In `:root[data-theme="light"]`, after `--color-switch-gap: #f6eedb;` add:
 
 ```css
-  --color-amber-ring: rgba(154, 90, 8, 0.5);
-  --color-amber-glow: rgba(154, 90, 8, 0.16);
-  --color-amber-wash-from: rgba(232, 182, 74, 0.28);
-  --color-amber-wash-to: rgba(240, 214, 160, 0.3);
-  --map-filter: none;
+--color-amber-ring: rgba(154, 90, 8, 0.5);
+--color-amber-glow: rgba(154, 90, 8, 0.16);
+--color-amber-wash-from: rgba(232, 182, 74, 0.28);
+--color-amber-wash-to: rgba(240, 214, 160, 0.3);
+--map-filter: none;
 ```
 
 Run `npm run build` at the end of Task 7 to confirm `--map-filter` is emitted. Tailwind v4 only outputs theme variables that generated CSS references, and Task 7 references it.
@@ -1632,10 +1685,12 @@ Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
 ### Task 7: Location map
 
 **Files:**
+
 - Create: `src/components/ui/LocationMap.tsx`, `src/components/sections/ContactLocation.tsx`, `public/icons/leaflet/marker-icon.png`, `marker-icon-2x.png`, `marker-shadow.png`
 - Modify: `src/content/contact.ts`, `src/app/(site)/contact-us/page.tsx`, `next.config.ts`, `scripts/check-images.mjs`
 
 **Interfaces:**
+
 - Consumes: `OfficeLocation`, `locations`, `contactLocation` from Task 6, `Button`.
 - Produces: `LocationMap({ location, label }: { location: OfficeLocation; label: string })`, `ContactLocation()`.
 
@@ -1686,8 +1741,8 @@ Expected: passes (each file is a few KB).
 In `scripts/check-images.mjs`, inside the `.forEach((line, i) => {` callback, add as the first statement after `const where = ...;`:
 
 ```js
-      // Map tiles from tile.openstreetmap.org are loaded at runtime by Leaflet and approved in the CSP.
-      if (line.includes("tile.openstreetmap.org")) return;
+// Map tiles from tile.openstreetmap.org are loaded at runtime by Leaflet and approved in the CSP.
+if (line.includes("tile.openstreetmap.org")) return;
 ```
 
 - [ ] **Step 5: Add the CSP entry**
@@ -1789,10 +1844,7 @@ export function ContactLocation() {
   const [location] = locations;
 
   return (
-    <section
-      id="directions"
-      className="mx-auto max-w-site px-5 pb-20 nav:px-7 nav:pb-28"
-    >
+    <section id="directions" className="mx-auto max-w-site px-5 pb-20 nav:px-7 nav:pb-28">
       <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,380px),1fr))] border border-line-bold bg-linear-120 from-panel-from to-panel-to shadow-panel">
         <div className="flex flex-col justify-center gap-5 p-[clamp(28px,4vw,52px)]">
           <div className="flex items-center gap-3.5">
@@ -1870,6 +1922,7 @@ Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
 ### Task 8: Visual verification, docs and merge
 
 **Files:**
+
 - Modify: `CLAUDE.md`, and any component that fails visual checks.
 
 **Interfaces:** none new.
