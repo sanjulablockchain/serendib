@@ -1,4 +1,4 @@
-import afterHoursImage from "../../public/images/after-hours.webp";
+import afterHoursImage from "../../public/images/after-hours-pediatrician.webp";
 import heroImage from "../../public/images/hero-family.webp";
 import partnersImage from "../../public/images/partners.webp";
 import { articles } from "@/content/blog";
@@ -160,7 +160,7 @@ export const afterHours = {
     "Our after-hours services are staffed by board-certified pediatricians. With fewer patients than an emergency room, your child gets professional, compassionate care without unnecessary exposure to germs.",
   cta: { label: "VISIT AFTERHOURS PEDIATRIC CLINIC", href: "https://pediatricafterhour.com/" },
   image: afterHoursImage,
-  imageAlt: "After-hours pediatric urgent care",
+  imageAlt: "Smiling pediatrician greeting a baby held by their mother during a visit",
 };
 
 export const doctorsSection = {
