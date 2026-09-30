@@ -1,9 +1,7 @@
 import afterHoursImage from "../../public/images/after-hours.webp";
 import heroImage from "../../public/images/hero-family.webp";
-import autismImage from "../../public/images/news/autism.webp";
-import memberOfferImage from "../../public/images/news/member-offer.webp";
-import monkeypoxImage from "../../public/images/news/monkeypox.webp";
 import partnersImage from "../../public/images/partners.webp";
+import { articles } from "@/content/blog";
 import { reportingFormHref } from "@/content/compliance";
 import { site } from "@/content/site";
 import type { ComplianceItem, Doctor, HealthPlan, NewsPost, PlanCategory, Stat } from "@/types";
@@ -332,35 +330,16 @@ export const news = {
   readMore: "READ MORE ▸",
 };
 
-export const newsPosts: NewsPost[] = [
-  {
-    title: "Autism Awareness Month: Embracing Neurodiversity",
-    excerpt:
-      "How we create sensory friendly, inclusive care for children with autism and their families.",
-    tag: "APRIL 2024",
-    href: "https://www.serendibhealthways.com/embracing-neurodiversity-celebrating-autism-awareness-month-at-serendib/",
-    image: autismImage,
-    imageAlt: "Colorful letters spelling Autism",
-  },
-  {
-    title: "Monkeypox Alert",
-    excerpt:
-      "No prior authorization, precertification or referral required for monkeypox diagnosis or treatment.",
-    tag: "HEALTH ALERT",
-    href: "https://www.serendibhealthways.com/monkeypox-alert/",
-    image: monkeypoxImage,
-    imageAlt: "Monkeypox symptoms",
-  },
-  {
-    title: "All Commercial Group Members Get 20% Off",
-    excerpt:
-      "20% off out-of-pocket expenses, co-pays and deductibles for every commercial group member.",
-    tag: "MEMBER OFFER",
-    href: "https://www.serendibhealthways.com/all-commercial-group-members-get-20-off/",
-    image: memberOfferImage,
-    imageAlt: "Pediatric insurance Los Angeles",
-  },
-];
+export const newsPosts: NewsPost[] = articles.map(
+  ({ slug, title, excerpt, tag, image, imageAlt }) => ({
+    title,
+    excerpt,
+    tag,
+    href: `/blog/${slug}`,
+    image,
+    imageAlt,
+  }),
+);
 
 export const switching = {
   title: "SWITCHING TO SERENDIB HEALTHWAYS",
