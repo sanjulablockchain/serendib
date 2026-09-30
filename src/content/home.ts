@@ -50,8 +50,8 @@ export const stats: Stat[] = [
 export const plan = {
   eyebrow: "WHY SERENDIB HEALTHWAYS",
   title: "Say goodbye to HMO restrictions.",
-  on: "ON",
-  off: "OFF",
+  on: "INCLUDED",
+  off: "REMOVED",
 };
 
 export const planCategories: PlanCategory[] = [

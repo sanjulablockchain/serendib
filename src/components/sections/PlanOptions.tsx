@@ -76,7 +76,7 @@ export function PlanOptions() {
                   note={row.note}
                   badge={row.on ? plan.on : plan.off}
                   badgeClassName={cn(
-                    "w-[72px] text-[13px] xs:w-24",
+                    "w-[92px] text-[12px] xs:w-28 xs:text-[13px]",
                     row.on ? "text-heading" : "text-amber",
                   )}
                 />
