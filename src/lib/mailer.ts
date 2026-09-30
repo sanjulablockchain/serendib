@@ -1,4 +1,7 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import nodemailer, { type SendMailOptions } from "nodemailer";
+import { buildContactHtml, LOGO_CID } from "@/lib/email-template";
 import type { ContactInput } from "@/types";
 
 export type MailConfig = {
@@ -37,17 +40,25 @@ export function readMailConfig(env: Env): MailConfig | null {
   };
 }
 
+const LOGO_PATH = join(process.cwd(), "public", "images", "logo.png");
+
 export function buildMessage(
   input: ContactInput,
   config: Pick<MailConfig, "to" | "from">,
+  logoPath: string = LOGO_PATH,
 ): SendMailOptions {
   const name = oneLine(input.name);
+  const hasLogo = existsSync(logoPath);
   return {
     from: { name: "Serendib Healthways website", address: config.from },
     to: config.to,
     replyTo: { name, address: input.email },
     subject: `Website contact: ${name}`,
     text: `Name: ${name}\nEmail: ${input.email}\n\n${input.message}`,
+    html: buildContactHtml(input, { logo: hasLogo }),
+    attachments: hasLogo
+      ? [{ filename: "serendib-healthways.png", path: logoPath, cid: LOGO_CID }]
+      : [],
   };
 }
 
