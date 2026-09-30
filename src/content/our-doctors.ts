@@ -26,8 +26,8 @@ export const affiliated = {
   description:
     "Our partnership gives members access to a comprehensive range of pediatric services, including well-child check-ups, immunizations, and treatment for acute and chronic illnesses, from preventive care to urgent care and more.",
   cta: { label: "GET IN TOUCH", href: "/contact-us" },
-  image: "/images/affiliated.webp",
-  imageAlt: "Pediatrician giving a high five to a young patient",
+  image: "/images/affiliated-clinic.webp",
+  imageAlt: "Pediatric nurse smiling with a young girl in a colorful exam room",
   group: {
     name: "Kids & Teens Medical Group",
     href: "https://www.ktdoctor.com/",
