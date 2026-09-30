@@ -78,6 +78,31 @@ export type NewsPost = {
   imageAlt: string;
 };
 
+export type ArticleListItem = {
+  term?: string;
+  text: string;
+};
+
+export type ArticleBlock =
+  | { type: "heading"; text: string }
+  | { type: "paragraph"; text: string }
+  | { type: "list"; ordered?: boolean; items: ArticleListItem[] }
+  | {
+      type: "contact";
+      title: string;
+      lines: { label: string; value: string; href?: string }[];
+    };
+
+export type BlogArticle = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  tag: string;
+  image: StaticImageData;
+  imageAlt: string;
+  body: ArticleBlock[];
+};
+
 export type DoctorArea = {
   id: string;
   name: string;
