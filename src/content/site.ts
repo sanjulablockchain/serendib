@@ -33,6 +33,7 @@ export const mainNav: NavItem[] = [
   { label: "Who We Are", href: "/who-we-are" },
   { label: "Our Partners", href: "/our-partners" },
   { label: "Our Doctors", href: "/our-doctors" },
+  { label: "Compliance", href: "/compliance" },
   { label: "Guidelines and Procedures", href: "/guidelines-and-procedures" },
   { label: "Blog", href: "/blog" },
   { label: "Contact Us", href: "/contact-us" },
@@ -47,7 +48,7 @@ export const navLeft: NavItem[] = [
 
 export const navRight: NavItem[] = [
   { label: "OUR PARTNERS", href: "/our-partners" },
-  { label: "COMPLIANCE", href: "/#compliance" },
+  { label: "COMPLIANCE", href: "/compliance" },
   { label: "CONTACT", href: "/contact-us" },
 ];
 
@@ -56,7 +57,7 @@ export const mobileNav: NavLinkItem[] = [
   { numeral: "II", label: "WHO WE ARE", href: "/who-we-are" },
   { numeral: "III", label: "OUR DOCTORS", href: "/our-doctors" },
   { numeral: "IV", label: "OUR PARTNERS", href: "/our-partners" },
-  { numeral: "V", label: "COMPLIANCE", href: "/#compliance" },
+  { numeral: "V", label: "COMPLIANCE", href: "/compliance" },
   { numeral: "VI", label: "NEWS & ARTICLES", href: "/#news" },
   { numeral: "VII", label: "CONTACT", href: "/contact-us" },
 ];
@@ -81,9 +82,9 @@ export const footerColumns: FooterColumn[] = [
   {
     title: "OTHER",
     links: [
-      { label: "Compliance", href: "/#compliance" },
+      { label: "Compliance", href: "/compliance" },
       { label: "Guidelines & Procedures", href: "/guidelines-and-procedures" },
-      { label: "Terms & Conditions", href: "/terms-and-conditions" },
+      { label: "Terms of Use", href: "/terms-and-conditions" },
       { label: "Privacy Policy", href: "/privacy-policy" },
       { label: "Contact Us", href: "/contact-us" },
       { label: "Facebook", href: "https://www.facebook.com/serendibhealthways/" },

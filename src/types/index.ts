@@ -65,7 +65,7 @@ export type ComplianceItem = {
   title: string;
   note: string;
   action: string;
-  href: string;
+  href?: string;
   pending?: boolean;
 };
 

@@ -34,20 +34,20 @@ project rule is broken.
 
 ## Files
 
-| File                                             | Purpose                                                                 |
-| ------------------------------------------------ | ----------------------------------------------------------------------- |
-| `src/content/contact.ts`                         | All copy, channel list, typed `locations` array                         |
-| `src/types/index.ts`                             | `ContactChannel`, `OfficeLocation` types                                |
-| `src/components/sections/ContactHero.tsx`        | Hero section                                                            |
-| `src/components/sections/ContactMessage.tsx`     | Form panel plus channels column                                         |
-| `src/components/sections/ContactLocation.tsx`    | Location panel                                                          |
-| `src/components/ui/ChannelRow.tsx`               | Reusable channel row (link or static)                                   |
-| `src/components/ui/ContactForm.tsx`              | Client component, `useActionState`, sent state                          |
-| `src/components/ui/LocationMap.tsx`              | Client component, Leaflet loaded dynamically inside an effect           |
-| `src/app/(site)/contact-us/actions.ts`           | Server Action: validate, rate limit, send                               |
-| `src/lib/mailer.ts`                              | Nodemailer SMTP transport and message builder                           |
-| `public/icons/`                                  | Leaflet marker images copied locally (no CDN)                           |
-| `.env.example`                                   | Documents `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `CONTACT_TO`, `CONTACT_FROM` |
+| File                                          | Purpose                                                                                    |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `src/content/contact.ts`                      | All copy, channel list, typed `locations` array                                            |
+| `src/types/index.ts`                          | `ContactChannel`, `OfficeLocation` types                                                   |
+| `src/components/sections/ContactHero.tsx`     | Hero section                                                                               |
+| `src/components/sections/ContactMessage.tsx`  | Form panel plus channels column                                                            |
+| `src/components/sections/ContactLocation.tsx` | Location panel                                                                             |
+| `src/components/ui/ChannelRow.tsx`            | Reusable channel row (link or static)                                                      |
+| `src/components/ui/ContactForm.tsx`           | Client component, `useActionState`, sent state                                             |
+| `src/components/ui/LocationMap.tsx`           | Client component, Leaflet loaded dynamically inside an effect                              |
+| `src/app/(site)/contact-us/actions.ts`        | Server Action: validate, rate limit, send                                                  |
+| `src/lib/mailer.ts`                           | Nodemailer SMTP transport and message builder                                              |
+| `public/icons/`                               | Leaflet marker images copied locally (no CDN)                                              |
+| `.env.example`                                | Documents `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `CONTACT_TO`, `CONTACT_FROM` |
 
 The page composes sections only. Reuse `Container`, `CornerFrame`, `Button`, `SectionHeading`,
 `PageIntro` patterns where they fit.

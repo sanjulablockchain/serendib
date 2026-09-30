@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
+import { linkProps } from "@/lib/links";
 
 type HudRowProps = {
   title: string;
@@ -44,7 +45,7 @@ export function HudRow({ title, note, badge, href, badgeClassName, leftMark }: H
   );
 
   return href ? (
-    <Link href={href} className={row}>
+    <Link href={href} className={row} {...linkProps(href)}>
       {content}
     </Link>
   ) : (

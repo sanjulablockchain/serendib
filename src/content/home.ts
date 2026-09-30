@@ -4,6 +4,7 @@ import autismImage from "../../public/images/news/autism.webp";
 import memberOfferImage from "../../public/images/news/member-offer.webp";
 import monkeypoxImage from "../../public/images/news/monkeypox.webp";
 import partnersImage from "../../public/images/partners.webp";
+import { reportingFormHref } from "@/content/compliance";
 import { site } from "@/content/site";
 import type { ComplianceItem, Doctor, HealthPlan, NewsPost, PlanCategory, Stat } from "@/types";
 
@@ -284,45 +285,43 @@ export const complianceItems: ComplianceItem[] = [
     title: "Compliance Concern Reporting",
     note: "Report a concern confidentially using our online form.",
     action: "REPORT",
-    href: "#",
+    href: reportingFormHref,
   },
   {
     title: "Annual Provider Compliance Training",
     note: "Required yearly training for all network providers.",
     action: "COMING SOON",
-    href: "#",
     pending: true,
   },
   {
     title: "Compliance Training Attestation",
     note: "Confirm completion of your annual compliance training.",
     action: "COMING SOON",
-    href: "#",
     pending: true,
   },
   {
     title: "Compliance Program",
     note: "COMP 01 · Our commitment to ethical, lawful operations.",
     action: "VIEW PDF",
-    href: "#",
+    href: "/documents/comp-01-compliance-program-v1.pdf",
   },
   {
     title: "HIPAA Program",
     note: "COMP 03 · How we protect member health information.",
     action: "VIEW PDF",
-    href: "#",
+    href: "/documents/comp-03-hipaa-program-v1.pdf",
   },
   {
     title: "Fraud, Waste & Abuse Program",
     note: "COMP 04 · Preventing, detecting and reporting FWA.",
     action: "VIEW PDF",
-    href: "#",
+    href: "/documents/comp-04-fraud-waste-abuse-program-v1.pdf",
   },
   {
     title: "Non-Discrimination",
     note: "COMP 33 · Equal access to care for every member.",
     action: "VIEW PDF",
-    href: "#",
+    href: "/documents/comp-33-non-discrimination-v1.pdf",
   },
 ];
 
