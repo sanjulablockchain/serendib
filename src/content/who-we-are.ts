@@ -1,5 +1,5 @@
-import careImage from "../../public/images/after-hours.webp";
-import introImage from "../../public/images/who-intro.webp";
+import careImage from "../../public/images/after-hours-pediatrician.webp";
+import introImage from "../../public/images/who-intro-care.webp";
 
 export const whoIntro = {
   breadcrumb: { home: "HOME", current: "WHO WE ARE" },
@@ -13,7 +13,7 @@ export const whoIntro = {
   primaryCta: { label: "GET IN TOUCH", href: "/contact-us" },
   secondaryCta: { label: "FIND A DOCTOR", href: "/our-doctors" },
   image: introImage,
-  imageAlt: "Child healthcare insurance",
+  imageAlt: "Nurse in green scrubs gently holding the hands of a young girl on a sofa",
   imageCaption: "PEDIATRIC HMO / IPA · LOS ANGELES COUNTY",
 };
 
@@ -60,7 +60,7 @@ export const care = {
     { value: "SAME DAY", label: "WELL & SICK VISITS" },
   ],
   image: careImage,
-  imageAlt: "Pediatrician caring for a young patient",
+  imageAlt: "Smiling pediatrician greeting a baby held by their mother during a visit",
 };
 
 export const group = {
