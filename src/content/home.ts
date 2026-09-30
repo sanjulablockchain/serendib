@@ -368,3 +368,16 @@ export const footerActions = {
   text: "TEXT",
   top: "BACK TO TOP",
 };
+
+export const transferTeaser = {
+  eyebrow: "STUCK WITH YOUR HMO PLAN RESTRICTIONS?",
+  title: "Belong to another HMO IPA?",
+  description: "We can help you do an immediate transfer to our own network.",
+  steps: [
+    { id: "research", label: "Research Plans" },
+    { id: "enroll", label: "Enroll With Us" },
+    { id: "benefits", label: "Receive Benefits" },
+  ],
+  cta: { label: "BOOK A CALL WITH OUR TRANSFER TEAM", href: site.contact.transferBookingHref },
+  more: { label: "HOW SWITCHING WORKS", href: "#switch" },
+};
