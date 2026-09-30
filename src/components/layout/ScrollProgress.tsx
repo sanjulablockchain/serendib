@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-const cap = "absolute left-1/2 size-[7px] -translate-x-1/2 rounded-full border border-gold bg-page";
+const cap = "absolute left-1/2 size-[5px] -translate-x-1/2 rounded-full border border-gold bg-page";
 
 /** Vertical page progress gauge fixed to the right edge on wide screens. */
 export function ScrollProgress() {
@@ -38,14 +38,14 @@ export function ScrollProgress() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed top-1/2 right-3.5 z-[25] hidden h-[38vh] w-2 -translate-y-1/2 rounded border border-frame bg-rail-bg nav:block"
+      className="pointer-events-none fixed top-1/2 right-3.5 z-[25] hidden h-[26vh] w-1.5 -translate-y-1/2 rounded border border-frame bg-rail-bg nav:block"
     >
-      <span className={`${cap} -top-[9px]`} />
+      <span className={`${cap} -top-[7px]`} />
       <div
         ref={thumbRef}
         className="absolute inset-x-px top-px h-[18%] rounded-[3px] bg-linear-to-b from-aqua to-aqua-deep shadow-aqua"
       />
-      <span className={`${cap} -bottom-[9px]`} />
+      <span className={`${cap} -bottom-[7px]`} />
     </div>
   );
 }

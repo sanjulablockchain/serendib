@@ -445,6 +445,8 @@
     line-height: normal;
     @apply bg-canvas;
     transition: background-color 0.4s;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-gold) var(--color-canvas);
   }
 
   body {
