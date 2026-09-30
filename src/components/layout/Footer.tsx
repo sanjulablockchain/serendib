@@ -2,12 +2,23 @@ import Image from "next/image";
 import { linkProps } from "@/lib/links";
 import Link from "next/link";
 import { footerActions } from "@/content/home";
-import { footerColumns, site } from "@/content/site";
+import { footerColumns, site, socialLinks } from "@/content/site";
 import { hitArea } from "@/lib/styles";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  MessageIcon,
+  PhoneIcon,
+  YouTubeIcon,
+} from "@/components/ui/Icons";
 
-const action = `${hitArea} flex items-center gap-[9px] text-fg hover:text-gold-bright`;
-const actionIcon =
-  "flex size-[26px] items-center justify-center rounded-full border-2 text-[12px] font-bold";
+const iconButton =
+  "flex size-11 items-center justify-center rounded-full border-2 transition-colors";
+const socialIcons: Record<string, typeof FacebookIcon> = {
+  Facebook: FacebookIcon,
+  Instagram: InstagramIcon,
+  YouTube: YouTubeIcon,
+};
 const footerLink = `${hitArea} text-soft hover:text-gold-bright`;
 
 export function Footer() {
@@ -57,24 +68,34 @@ export function Footer() {
 
         <div className="flex flex-col items-end gap-3">
           <span className="h-0.5 w-[min(100%,440px)] bg-(image:--gradient-rule-end)" />
-          <div className="flex flex-wrap justify-end gap-[26px] font-display text-[13px] tracking-[0.1em]">
-            <a href={contact.phoneHref} className={action}>
-              <span aria-hidden="true" className={`${actionIcon} border-gold text-gold-bright`}>
-                C
-              </span>
-              {footerActions.call}
+          <div className="flex flex-wrap items-center justify-end gap-3">
+            {socialLinks.map((link) => {
+              const Icon = socialIcons[link.label];
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  aria-label={link.label}
+                  className={`${iconButton} border-line-strong text-soft hover:border-gold hover:text-gold-bright`}
+                  {...linkProps(link.href)}
+                >
+                  {Icon && <Icon />}
+                </a>
+              );
+            })}
+            <a
+              href={contact.phoneHref}
+              aria-label={footerActions.call}
+              className={`${iconButton} border-gold text-gold-bright hover:text-gold-pale`}
+            >
+              <PhoneIcon />
             </a>
-            <a href={contact.textHref} className={action}>
-              <span aria-hidden="true" className={`${actionIcon} border-leaf text-mint`}>
-                T
-              </span>
-              {footerActions.text}
-            </a>
-            <a href="#top" className={action}>
-              <span aria-hidden="true" className={`${actionIcon} border-aqua-ring text-aqua`}>
-                ↑
-              </span>
-              {footerActions.top}
+            <a
+              href={contact.textHref}
+              aria-label={footerActions.text}
+              className={`${iconButton} border-leaf text-mint hover:text-cream`}
+            >
+              <MessageIcon />
             </a>
           </div>
         </div>

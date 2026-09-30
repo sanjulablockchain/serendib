@@ -87,16 +87,15 @@ export const footerColumns: FooterColumn[] = [
       { label: "Terms of Use", href: "/terms-and-conditions" },
       { label: "Privacy Policy", href: "/privacy-policy" },
       { label: "Contact Us", href: "/contact-us" },
-      { label: "Facebook", href: "https://www.facebook.com/serendibhealthways/" },
-      {
-        label: "YouTube",
-        href: "https://www.youtube.com/channel/UCpc-umQeo6CQFLHq4bTWeUQ",
-      },
     ],
   },
 ];
 
 export const socialLinks: SocialLink[] = [
-  { label: "Facebook", href: "https://www.facebook.com/serendibhealthways" },
+  { label: "Facebook", href: "https://www.facebook.com/serendibhealthways/" },
   { label: "Instagram", href: "https://www.instagram.com/serendib_healthways/" },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/channel/UCpc-umQeo6CQFLHq4bTWeUQ",
+  },
 ];

@@ -364,9 +364,9 @@ export const switching = {
 };
 
 export const footerActions = {
-  call: "CALL",
-  text: "TEXT",
-  top: "BACK TO TOP",
+  call: "Call us",
+  text: "Text us",
+  top: "Back to top",
 };
 
 export const transferTeaser = {
