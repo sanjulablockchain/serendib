@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { HudRow } from "@/components/ui/HudRow";
 import { Medallion } from "@/components/ui/Medallion";
-import { Rail } from "@/components/ui/Rail";
 import { compliance, complianceItems } from "@/content/home";
 import { cn } from "@/lib/cn";
 
@@ -26,7 +25,7 @@ export function Compliance() {
         </Button>
       </div>
 
-      <div className="flex gap-[18px]">
+      <div className="flex">
         <div data-stagger className="flex min-w-0 flex-1 flex-col gap-2.5">
           {complianceItems.map((item) => (
             <HudRow
@@ -42,7 +41,6 @@ export function Compliance() {
             />
           ))}
         </div>
-        <Rail thumbClassName="top-0.5 h-[60%]" />
       </div>
     </section>
   );
