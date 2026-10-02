@@ -30,7 +30,7 @@ export function ComplianceHero() {
               </span>
               <Link
                 href={channel.href}
-                className={`${hitArea} self-start text-[20px] leading-[1.35] font-medium break-words text-gold-bright hover:text-gold-pale`}
+                className={`${hitArea} self-start text-[20px] leading-[1.35] font-medium [overflow-wrap:anywhere] text-gold-bright hover:text-gold-pale`}
                 {...linkProps(channel.href)}
               >
                 {channel.label}
