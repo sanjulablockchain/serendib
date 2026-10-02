@@ -16,7 +16,7 @@ export function ReportingChannels({ channels }: { channels: Channel[] }) {
           <strong className="font-semibold text-fg">{channel.label}:</strong>
           <Link
             href={channel.href}
-            className={`${hitArea} break-words text-gold-bright hover:text-gold-pale`}
+            className={`${hitArea} [overflow-wrap:anywhere] text-gold-bright hover:text-gold-pale`}
             {...linkProps(channel.href)}
           >
             {channel.text}

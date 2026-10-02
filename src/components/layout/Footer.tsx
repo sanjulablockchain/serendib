@@ -26,7 +26,7 @@ export function Footer() {
 
   return (
     <footer className="relative z-[1] border-t border-footer-line bg-linear-to-b from-footer-from to-footer-to">
-      <div className="mx-auto flex max-w-site flex-col gap-[34px] px-7 pt-12 pb-7">
+      <div className="mx-auto flex max-w-site flex-col gap-[34px] px-7 pt-12 pb-36 nav:pb-7">
         <div className="flex flex-wrap justify-between gap-10">
           <div className="flex max-w-[380px] flex-col gap-3.5">
             <div className="self-start border border-gold bg-linear-to-b from-cream to-plate px-3.5 py-1.5">
@@ -66,7 +66,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-end gap-3">
+        <div className="flex flex-col items-end gap-3 nav:pr-20">
           <span className="h-0.5 w-[min(100%,440px)] bg-(image:--gradient-rule-end)" />
           <div className="flex flex-wrap items-center justify-end gap-3">
             {socialLinks.map((link) => {
