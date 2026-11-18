@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { legacyRedirects } from "./src/lib/legacy-redirects";
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -30,6 +31,8 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Self contained server for the Docker image on the Lightsail box (see Dockerfile).
+  output: "standalone",
   poweredByHeader: false,
   images: {
     // Local images only: no remotePatterns, so external image URLs fail the build.
@@ -37,6 +40,9 @@ const nextConfig: NextConfig = {
     qualities: [60, 75, 90],
     deviceSizes: [640, 768, 1024, 1280, 1536, 1920],
     minimumCacheTTL: 60 * 60 * 24 * 30,
+  },
+  async redirects() {
+    return legacyRedirects;
   },
   async headers() {
     return [

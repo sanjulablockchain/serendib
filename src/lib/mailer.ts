@@ -40,7 +40,9 @@ export function readMailConfig(env: Env): MailConfig | null {
   };
 }
 
-const LOGO_PATH = join(process.cwd(), "public", "images", "logo.png");
+// Read at runtime from public/, which the Docker image copies beside server.js. The ignore hint
+// stops the build from tracing the whole project into the standalone bundle.
+const LOGO_PATH = join(/*turbopackIgnore: true*/ process.cwd(), "public", "images", "logo.png");
 
 export function buildMessage(
   input: ContactInput,
