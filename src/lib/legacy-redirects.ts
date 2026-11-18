@@ -20,6 +20,7 @@ export const legacyRedirects: Redirect[] = [
     destination: "/blog/autism-awareness-month",
     permanent: true,
   },
+  { source: "/monkeypox-alert", destination: "/blog/monkeypox-alert", permanent: true },
   {
     source: "/15-year-anniversary-party15-year-anniversary-party",
     destination: "/blog",

@@ -12,6 +12,7 @@ const oldUrls: Record<string, string> = {
   "/all-commercial-group-members-get-20-off": "/blog/commercial-group-20-off",
   "/embracing-neurodiversity-celebrating-autism-awareness-month-at-serendib":
     "/blog/autism-awareness-month",
+  "/monkeypox-alert": "/blog/monkeypox-alert",
   "/partners": "/our-partners",
   "/feed": "/blog",
   "/comments/feed": "/blog",
