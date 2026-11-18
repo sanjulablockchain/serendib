@@ -157,7 +157,7 @@ Production runs as a Docker container on the shared KTMG Lightsail box (`3.19.17
 host nginx), next to about a dozen other apps including the EHR. Same pattern as sgmdoctor.com and
 sjhospital.lk.
 
-- App: `~/serendib` on the box, container `serendib-web-1` on `127.0.0.1:8220` (`HOST_PORT` in
+- App: `~/serendib` on the box, container `serendib-web-1` on `127.0.0.1:8250` (`HOST_PORT` in
   `.env.prod`), secrets in `~/serendib/.env.local` (mode 600, never in git or chat).
 - nginx: the `deploy/nginx.conf` section appended to `/etc/nginx/sites-available/apps-proxy`. The
   bare domain redirects to `https://www.serendibhealthways.com`. Cloudflare Origin CA certificate in
