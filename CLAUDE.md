@@ -94,6 +94,9 @@ The reference design lives in `design/`. It is the source of truth: the site mus
 
 ```
 design/                    Reference HTML design (source of truth, do not edit)
+deploy/                    Server config for the Lightsail box (nginx.conf section)
+Dockerfile                 Production image (standalone build, non root user)
+docker-compose.yml         Runs the image on 127.0.0.1:${HOST_PORT}
 public/
   images/                  Photos and illustrations (use next/image)
   icons/                   SVG icons and logos
@@ -147,6 +150,27 @@ The Contact page posts to a Server Action (`src/app/(site)/contact-us/actions.ts
 throttles and emails through Nodemailer over SMTP. Configure `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`,
 `SMTP_PASS`, `CONTACT_TO` and `CONTACT_FROM` in `.env.local` (see `.env.example`). The map uses
 Leaflet with OpenStreetMap tiles, the only external host allowed in the CSP (`img-src`).
+
+## Deployment
+
+Production runs as a Docker container on the shared KTMG Lightsail box (`3.19.170.142`, Ubuntu,
+host nginx), next to about a dozen other apps including the EHR. Same pattern as sgmdoctor.com and
+sjhospital.lk.
+
+- App: `~/serendib` on the box, container `serendib-web-1` on `127.0.0.1:8220` (`HOST_PORT` in
+  `.env.prod`), secrets in `~/serendib/.env.local` (mode 600, never in git or chat).
+- nginx: the `deploy/nginx.conf` section appended to `/etc/nginx/sites-available/apps-proxy`. The
+  bare domain redirects to `https://www.serendibhealthways.com`. Cloudflare Origin CA certificate in
+  `/etc/ssl/serendib/`.
+- Cloudflare: both records proxied to `3.19.170.142`, SSL mode Full (strict).
+- Deploy a new version: `cd ~/serendib && git pull && sudo docker compose --env-file .env.prod up -d --build`.
+- Visitor IP: nginx overwrites `X-Real-IP` with Cloudflare's `CF-Connecting-IP`. The app reads only
+  `X-Real-IP` (`src/lib/client-ip.ts`); never trust `X-Forwarded-For`.
+- Old WordPress addresses redirect via `src/lib/legacy-redirects.ts` (tested).
+- Shared box rules: run Docker commands only from `~/serendib`. Never `docker system prune`, never
+  restart Docker or nginx (reload only). Before and after any `apps-proxy` edit: back it up, run
+  `nginx -t`, and compare `~/bin/tenant-check.sh` output.
+- Keep Next.js patched: `npm run check:audit` must pass before every deploy.
 
 ## Definition of done
 
