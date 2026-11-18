@@ -1,6 +1,7 @@
 "use server";
 
 import { headers } from "next/headers";
+import { clientIp } from "@/lib/client-ip";
 import { processContact } from "@/lib/contact-submit";
 import { sendContactEmail } from "@/lib/mailer";
 import { createSubmitThrottle } from "@/lib/submit-throttle";
@@ -21,9 +22,7 @@ export async function submitContact(
   _previous: ContactFormState,
   formData: FormData,
 ): Promise<ContactFormState> {
-  const requestHeaders = await headers();
-  const forwarded = requestHeaders.get("x-forwarded-for")?.split(",")[0]?.trim();
-  const clientKey = forwarded || requestHeaders.get("x-real-ip") || "unknown";
+  const clientKey = clientIp(await headers());
 
   return processContact(formData, {
     now: Date.now,
