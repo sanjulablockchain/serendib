@@ -35,6 +35,7 @@ export const mainNav: NavItem[] = [
   { label: "Our Doctors", href: "/our-doctors" },
   { label: "Compliance", href: "/compliance" },
   { label: "Guidelines and Procedures", href: "/guidelines-and-procedures" },
+  { label: "Resources", href: "/resources" },
   { label: "Blog", href: "/blog" },
   { label: "Contact Us", href: "/contact-us" },
 ];
@@ -58,8 +59,9 @@ export const mobileNav: NavLinkItem[] = [
   { numeral: "III", label: "OUR DOCTORS", href: "/our-doctors" },
   { numeral: "IV", label: "OUR PARTNERS", href: "/our-partners" },
   { numeral: "V", label: "COMPLIANCE", href: "/compliance" },
-  { numeral: "VI", label: "NEWS & ARTICLES", href: "/#news" },
-  { numeral: "VII", label: "CONTACT", href: "/contact-us" },
+  { numeral: "VI", label: "RESOURCES", href: "/resources" },
+  { numeral: "VII", label: "NEWS & ARTICLES", href: "/#news" },
+  { numeral: "VIII", label: "CONTACT", href: "/contact-us" },
 ];
 
 export const footerColumns: FooterColumn[] = [
@@ -84,6 +86,7 @@ export const footerColumns: FooterColumn[] = [
     links: [
       { label: "Compliance", href: "/compliance" },
       { label: "Guidelines & Procedures", href: "/guidelines-and-procedures" },
+      { label: "Resources", href: "/resources" },
       { label: "Terms of Use", href: "/terms-and-conditions" },
       { label: "Privacy Policy", href: "/privacy-policy" },
       { label: "Contact Us", href: "/contact-us" },
