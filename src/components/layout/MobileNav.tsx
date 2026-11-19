@@ -53,7 +53,7 @@ export function MobileNav({ items, cta }: MobileNavProps) {
                   active ? "border-gold-bright text-gold-pale" : "border-line-mid text-fg",
                 )}
               >
-                <span className="w-[22px] text-[11px] text-gold">{item.numeral}</span>
+                <span className="w-[30px] shrink-0 text-[11px] text-gold">{item.numeral}</span>
                 {item.label}
                 <span
                   aria-hidden="true"

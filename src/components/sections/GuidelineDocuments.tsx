@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { DocumentCard } from "@/components/ui/DocumentCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import {
   documentsHeading,
@@ -47,30 +48,14 @@ export function GuidelineDocuments() {
           />
           <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-5">
             {guidelineDocuments.map((doc) => (
-              <article
+              <DocumentCard
                 key={doc.title}
-                className="relative flex flex-col gap-4 border border-line bg-linear-to-b from-card-from to-card-to px-[26px] pt-[30px] pb-7 hover:border-gold-bright hover:shadow-news-hover"
-              >
-                <span className="absolute top-3.5 right-[18px] font-display text-[12px] tracking-[0.14em] text-gold">
-                  {doc.year}
-                </span>
-                <h3 className="m-0 text-[22px] leading-[1.25] font-medium tracking-[0.02em] text-balance">
-                  {doc.title}
-                </h3>
-                <p className="m-0 flex-1 text-[18px] leading-[1.55] text-pretty text-soft">
-                  {doc.description}
-                </p>
-                <Button
-                  href={doc.href}
-                  variant="dark"
-                  size="md"
-                  className="min-h-[44px] self-start"
-                  aria-label={`${readDocumentLabel.toLowerCase()}: ${doc.title}, PDF`}
-                  {...newTab}
-                >
-                  {readDocumentLabel}
-                </Button>
-              </article>
+                title={doc.title}
+                tag={doc.year}
+                description={doc.description}
+                href={doc.href}
+                cta={readDocumentLabel}
+              />
             ))}
           </div>
         </div>

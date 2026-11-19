@@ -165,6 +165,22 @@ export type GuidelineDocument = {
   href: string;
 };
 
+export type ResourceLink = {
+  title: string;
+  /** Short format label shown on the card, such as "PDF" or "WEBSITE". */
+  tag: string;
+  description: string;
+  href: string;
+  cta: string;
+};
+
+export type ResourceGroup = {
+  eyebrow: string;
+  title: string;
+  note?: string;
+  items: ResourceLink[];
+};
+
 export type ContactFormState =
   | { status: "idle" }
   | { status: "error"; message: string; errors: ContactFieldErrors; values: ContactInput }
