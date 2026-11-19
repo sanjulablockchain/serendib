@@ -3,7 +3,7 @@ import Link from "next/link";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { NavLink } from "@/components/layout/NavLink";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { mobileNav, navLeft, navRight, site } from "@/content/site";
+import { mobileNav, navLeft, navRight, site, utilityNav } from "@/content/site";
 import { linkProps } from "@/lib/links";
 import { hitArea } from "@/lib/styles";
 
@@ -22,6 +22,15 @@ export function Header() {
         <div className="mx-auto flex max-w-site flex-wrap items-center justify-center gap-4 px-7 py-[7px] font-display text-[11px] tracking-[0.16em] text-subtle wide:justify-between">
           <span className="hidden wide:inline">{site.utilityTagline}</span>
           <div className="flex flex-wrap items-center gap-[22px] leading-none">
+            {utilityNav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`${hitArea} hidden text-gold-bright hover:text-gold-pale nav:inline`}
+              >
+                {item.label}
+              </Link>
+            ))}
             <a href={contact.phoneHref} className={utilityLink}>
               CALL {contact.phone}
             </a>

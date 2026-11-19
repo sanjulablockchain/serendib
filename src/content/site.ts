@@ -40,6 +40,9 @@ export const mainNav: NavItem[] = [
   { label: "Contact Us", href: "/contact-us" },
 ];
 
+/** Page links in the utility bar above the main header (tablet and desktop). */
+export const utilityNav: NavItem[] = [{ label: "RESOURCES", href: "/resources" }];
+
 /** Header links, split around the centered logo. */
 export const navLeft: NavItem[] = [
   { label: "HOME", href: "/" },
